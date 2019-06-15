@@ -1,0 +1,25 @@
+{
+  "name": "miniroutr",
+  "version": "1.0.0",
+  "description": "Minimal SIP server to investigate performance issues with Graal.js vs Nashorn in [Routr](https://github.com/fonoster/routr)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psanders/miniroutr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/psanders/miniroutr/issues"
+  },
+  "homepage": "https://github.com/psanders/miniroutr#readme",
+  "dependencies": {
+    "fast-csv": "^3.0.1",
+    "hertzy": "^0.1.1",
+    "line-reader": "^0.4.0",
+    "moment": "^2.24.0"
+  }
+}
