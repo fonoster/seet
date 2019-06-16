@@ -10,16 +10,4 @@ set BASE_DIR=%~dp0
 
 docker pull ctaloi/sipp
 
-docker run -it -p %SIPP_PORT%:%SIPP_PORT%/udp \
-    -v %BASE_DIR%:/sipp \
-    ctaloi/sipp %ROUTR_HOST% \
-    -t u1 \
-    -trace_err \
-    -trace_stat \
-    -p %SIPP_PORT% \
-    -sf %SCENARIO_FILE% \
-    -inf %REGISTER_FILE% \
-    -r 100 \
-    -m 100000 \
-    -l 100 \
-    -rate_increase 200 -fd 5s
+docker run -it -p %SIPP_PORT%:%SIPP_PORT%/udp -v %BASE_DIR%:/sipp ctaloi/sipp %ROUTR_HOST% -t t1 -trace_err -trace_stat -p %SIPP_PORT% -sf %SCENARIO_FILE% -inf %REGISTER_FILE% -r 100 -m 100000 -l 100 -rate_increase 200 -fd 5s
