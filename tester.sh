@@ -14,6 +14,7 @@ docker run -it -p $SIPP_PORT:$SIPP_PORT/udp \
     -t u1 \
     -trace_err \
     -trace_stat \
+    -trace_screen \
     -p $SIPP_PORT \
     -sf $SCENARIO_FILE \
     -inf $REGISTER_FILE \
