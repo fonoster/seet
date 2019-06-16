@@ -20,5 +20,4 @@ docker run -it -p $SIPP_PORT:$SIPP_PORT/udp \
     -inf $REGISTER_FILE \
     -r 10000 \
     -m 100000 \
-    -l 100 \
-    #-t tn \ if use this option the SOS begins blocking the TCP connections
+    -l 100
