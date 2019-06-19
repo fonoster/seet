@@ -25,7 +25,7 @@ docker run -it -p $SIPP_PORT:$SIPP_PORT/udp \
     -inf $REGISTER_FILE \
     -r 4000 \
     -l 100 \
-    -m 10000
+    -rate_increase 50 -fd 5s
 
 # Move screen report to out folder
 

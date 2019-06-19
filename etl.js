@@ -15,7 +15,7 @@ fs.unlink(dataInJS, () => {})
 const fd = fs.openSync(dataFile, 'a')
 const fd1 = fs.openSync(dataInJS, 'a')
 
-data.on('data:add', data => fs.appendFile(fd, data))
+data.on('data:add', data => fs.appendFileSync(fd, data, err => err && console.log(err)))
 data.on('data:transform', data => fs.appendFileSync(fd1, data, err => err && console.log(err)))
 
 function etlSIPpCPSReport(file) {
