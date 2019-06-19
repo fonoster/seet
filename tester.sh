@@ -2,6 +2,8 @@
 
 set -e
 
+mkdir -p out
+
 SIPP_PORT=5081
 ROUTR_HOST=192.168.1.137    # This should be a parameter
 SCENARIO_FILE=etc/scenarios/uac_register_guest.xml
@@ -26,5 +28,5 @@ docker run -it -p $SIPP_PORT:$SIPP_PORT/udp \
     -m 10000
 
 # Move screen report to out folder
-mkdir -p out
+
 mv etc/scenarios/*.log out
