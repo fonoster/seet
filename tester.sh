@@ -1,23 +1,30 @@
 #!/usr/bin/env bash
 
-SIPP_PORT=5080
-ROUTR_HOST=192.168.1.127
-SCENARIO_FILE=etc/uac_register.xml
-REGISTER_FILE=etc/register.csv
-REPORT_FILE=out/report.trace
+set -e
 
+SIPP_PORT=5081
+ROUTR_HOST=192.168.1.137    # This should be a parameter
+SCENARIO_FILE=etc/scenarios/uac_register_guest.xml
+REGISTER_FILE=etc/scenarios/register_guest.csv
+STATS_FILE=out/report.csv
+
+# Check if image is availble
 docker pull ctaloi/sipp
 
 docker run -it -p $SIPP_PORT:$SIPP_PORT/udp \
     -v $PWD:/sipp \
     ctaloi/sipp $ROUTR_HOST \
-    -t u1 \
-    -trace_err \
+    -t t1 \
     -trace_stat \
     -trace_screen \
     -p $SIPP_PORT \
     -sf $SCENARIO_FILE \
+    -stf $STATS_FILE \
     -inf $REGISTER_FILE \
-    -r 10000 \
-    -m 100000 \
-    -l 100
+    -r 4000 \
+    -l 100 \
+    -m 10000
+
+# Move screen report to out folder
+mkdir -p out
+mv etc/scenarios/*.log out
