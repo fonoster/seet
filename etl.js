@@ -4,16 +4,19 @@ const moment = require('moment')
 const lineReader = require('line-reader')
 const Hertzy = require('hertzy')
 const data = Hertzy.tune('data')
-const dataFile = 'etc/data.tsv'
-const dataInJS = 'etc/data.js'
-const scenarioFile = 'etc/uac_register_1_.csv'
-const cpuAndMemoryFile = 'etc/CpuAndMemory.json'
+const dataFile = 'out/data.tsv'
+const dataInJS = 'out/data.js'
+const statsReport = 'out/stats_report.csv'  // This should be a parameter
+const cpuAndMemoryFile = 'out/CpuAndMemory.json'
 
-fs.unlink(dataFile, () => {})
+//fs.unlink(dataFile, () => {})
 fs.unlink(dataInJS, () => {})
 
 const fd = fs.openSync(dataFile, 'a')
 const fd1 = fs.openSync(dataInJS, 'a')
+
+data.on('data:add', data => fs.appendFile(fd, data))
+data.on('data:transform', data => fs.appendFileSync(fd1, data, err => err && console.log(err)))
 
 function etlSIPpCPSReport(file) {
     fs.createReadStream(file)
@@ -30,17 +33,19 @@ function etlJVMReport(file, metricName, metricFunc) {
     lineReader.eachLine(file, (line, last) => {
         const jsonObj = JSON.parse(line)
         const elapsedTime = moment(new Date(jsonObj.epochMillis)).format('YYYY-MM-DD h:mm:ss')
-        if (jsonObj.systemCpuLoad > 0) {
-          data.emit('data:add', metricName + '\t' + elapsedTime + '\t' + metricFunc(jsonObj) + '\n')
-        }
+        data.emit('data:add', metricName + '\t' + elapsedTime + '\t' + metricFunc(jsonObj) + '\n')
         if (last) return false
     })
     console.log('Completed ' + metricName + ' report')
 }
 
-function transformToJS(fd, metric) {
+function transformToJS(fd, metric, firstSet = false) {
     const xMatrix = []
     const yMatrix = []
+
+    if (firstSet) {
+        data.emit('data:transform', 'var xData = []; var yData = [];')
+    }
 
     lineReader.eachLine(fd, (line, last) => {
         if (line.split('\t')[0] === metric) {
@@ -58,27 +63,20 @@ function transformToJS(fd, metric) {
     })
 }
 
-data.on('data:add', data => {
-    fs.appendFileSync(fd, data)
-})
-
-data.on('data:transform', data => {
-    fs.appendFileSync(fd1, data, (err) => {
-      if (err) console.log(err)
-    })
-})
-
+/*
 etlJVMReport(cpuAndMemoryFile, 'CPU', jsonObj => {
-    return (jsonObj.processCpuLoad / jsonObj.systemCpuLoad) * 100
+    return jsonObj.systemCpuLoad > 0 ?
+        (jsonObj.processCpuLoad / jsonObj.systemCpuLoad) * 100 : 0
 })
 
 etlJVMReport(cpuAndMemoryFile, 'MEM', jsonObj => {
-    return (jsonObj.heapMemoryTotalUsed / jsonObj.heapMemoryCommitted) * 100
+    return jsonObj.heapMemoryCommitted > 0 ?
+        (jsonObj.heapMemoryTotalUsed / jsonObj.heapMemoryCommitted) * 100 : 0
 })
 
-/*
-data.emit('data:transform', 'var xData = []; var yData = [];')
-transformToJS(fd, 'CPS')
-transformToJS(fd, 'CPU')
-transformToJS(fd, 'MEM')
+etlSIPpCPSReport(statsReport)
 */
+
+transformToJS(dataFile, 'CPS', true)
+transformToJS(dataFile, 'CPU')
+transformToJS(dataFile, 'MEM')

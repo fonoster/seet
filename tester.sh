@@ -8,7 +8,7 @@ SIPP_PORT=5081
 ROUTR_HOST=192.168.1.137    # This should be a parameter
 SCENARIO_FILE=etc/scenarios/uac_register_guest.xml
 REGISTER_FILE=etc/scenarios/register_guest.csv
-STATS_FILE=out/report.csv
+STATS_FILE=out/stats_report.csv
 
 # Check if image is availble
 docker pull ctaloi/sipp
