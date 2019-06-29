@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/psanders/miniroutr#readme",
   "dependencies": {
+    "colors": "^1.3.3",
     "fast-csv": "^3.0.1",
     "hertzy": "^0.1.1",
     "line-reader": "^0.4.0",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "sleep": "^6.1.0"
   }
 }
