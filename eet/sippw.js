@@ -1,8 +1,8 @@
 const { execSync } = require('child_process')
+const { exec } = require('child_process')
 
 class SIPpW {
     constructor(remoteHost, localPort = Math.floor(Math.random() * 6000) + 5080) {
-        console.log('localPort: ' + localPort)
         this.opts = new Map()
         this.opts.set('-p', localPort)
         this.opts.set('-r', 1)
@@ -86,10 +86,13 @@ class SIPpW {
         return result
     }
 
-    startAsync() {}
+    startAsync(callback) {
+        const cmd = this.build()
+        return exec(cmd, { timeout: this.timeout }, callback)
+    }
 
     stop() {
-        console.log('Stopping SIPpW')
+        // Noop
     }
 }
 
