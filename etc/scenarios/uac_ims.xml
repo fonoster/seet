@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
-<scenario name="UAC IMS">
-   <send retrans="500" start_rtd="true">
-       <![CDATA[MESSAGE sip:[field0] SIP/2.0
-         Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
-         From: sipp <sip:[field0]>;tag=[field0]
-         To: dut <sip:[field1]:[remote_port]>
-         Call-ID: [call_id]
-         CSeq: 1 MESSAGE
-         Contact: sip:sipp@[local_ip]:[local_port]
-         Max-Forwards: 70
-         Subject: Performance Test
-         Content-Type: plain/text
-         Content-Length: [len]
 
-         hello!]]>
-   </send>
-   <recv response="404" optional="true" rtd="true">
+<scenario name="instant message">
+    <send retrans="500">
+      <![CDATA[MESSAGE sip:[field0] SIP/2.0
+        Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+        From: "sipp" <sip:[field0]>;tag=[field0]
+        To: "dut" <sip:[field1]>
+        Call-ID: [call_id]
+        CSeq: 1 MESSAGE
+        Contact: sip:sipp@[local_ip]:[local_port]
+        Max-Forwards: 70
+        Subject: Performance Test
+        Content-Type: text/plain
+        Content-Length: [len]
+
+        hello!]]>
+    </send>
+    <recv response="400" optional="true" rtd="true">
       <action>
-         <exec int_cmd="stop_call" />
+        <exec int_cmd="stop_call"/>
       </action>
-   </recv>
-   <recv response="200" crlf="true" rtd="true" />
-   <!--
-   definition of the response time repartition table (unit is ms)
-  -->
-   <ResponseTimeRepartition value="10, 50, 100, 150, 200, 500, 1000" />
+    </recv>
+    <recv response="200" crlf="true" rtd="true"></recv>
+
+    <CallLengthRepartition value="10, 50, 100, 150, 200, 500, 1000"/>
+    <ResponseTimeRepartition value="10, 50, 100, 150, 200, 500, 1000"/>
 </scenario>

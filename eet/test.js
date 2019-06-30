@@ -5,8 +5,8 @@ const { veredict } = require('./util')
 
 console.log('Routr Server EETs')
 const dutHost = '192.168.1.149'
-const transportMode = 't1'
+const transportMode = 'u1'
 
-//veredict(uac_register_guest(dutHost))
+//veredict(uac_register_guest(dutHost, transportMode))
 //veredict(uac_register(dutHost))
 veredict(ims(dutHost, transportMode))
