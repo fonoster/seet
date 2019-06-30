@@ -2,10 +2,10 @@
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 <scenario name="UAC IMS">
    <send retrans="500" start_rtd="true">
-       <![CDATA[MESSAGE sip:[field0]@[field1]:[remote_port] SIP/2.0
+       <![CDATA[MESSAGE sip:[field0] SIP/2.0
          Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
-         From: sipp <sip:sipp@[local_ip]:[local_port]>;tag=[field0]
-         To: dut <sip:[field0]@[field1]:[remote_port]>
+         From: sipp <sip:[field0]>;tag=[field0]
+         To: dut <sip:[field1]:[remote_port]>
          Call-ID: [call_id]
          CSeq: 1 MESSAGE
          Contact: sip:sipp@[local_ip]:[local_port]

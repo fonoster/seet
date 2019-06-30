@@ -1,12 +1,12 @@
 const SIPpW = require('./sippw')
 
-function test(dutHost) {
+function test(dutHost, transportMode) {
     const testName = 'UAC Registration'
 
     const result = new SIPpW(dutHost)
       .withScenario('etc/scenarios/uac_register.xml')
         .withInf('etc/scenarios/uac_register.csv')
-          .withTimeout(5000)
+          .withTransportMode(transportMode)
             .start()
 
     return {
