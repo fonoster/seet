@@ -7,13 +7,13 @@ function test(dutHost, transportMode) {
     new SIPpW(dutHost)
       .withScenario('etc/scenarios/uas_ims.xml')
         .withTransportMode(transportMode)
-          .withTimeout(30000)
-            .startAsync((error, stdout, stderr) => {
-                if (error) {
-                    console.error(`exec error: ${error}`)
-                    return
-                }
-            })
+          .startAsync((error, stdout, stderr) => {
+              if (error) {
+                  //console.error(`exec error: ${error}`)
+                  // TODO: End instance after 
+                  return
+              }
+          })
 
     const result = new SIPpW(dutHost)
       .withScenario('etc/scenarios/uac_ims.xml')

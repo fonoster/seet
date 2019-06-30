@@ -3,19 +3,20 @@
 
 <scenario name="instant message">
     <send retrans="500">
-      <![CDATA[MESSAGE sip:[field0] SIP/2.0
-        Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
-        From: "sipp" <sip:[field0]>;tag=[field0]
-        To: "dut" <sip:[field1]>
-        Call-ID: [call_id]
-        CSeq: 1 MESSAGE
-        Contact: sip:sipp@[local_ip]:[local_port]
-        Max-Forwards: 70
-        Subject: Performance Test
-        Content-Type: text/plain
-        Content-Length: [len]
+        <![CDATA[
+            MESSAGE sip:[field0] SIP/2.0
+            Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+            Max-Forwards: 70
+            From: "sipp" <sip:[field0]>;tag=[call_number]
+            To: "dut" <sip:[field1]>
+            Call-ID: [call_id]
+            CSeq: 1 MESSAGE
+            Subject: Performance Test
+            Content-Type: text/plain
+            Content-Length: [len]
 
-        hello!]]>
+            Hello!
+        ]]>
     </send>
     <recv response="400" optional="true" rtd="true">
       <action>
