@@ -50,7 +50,7 @@ class SIPpW {
         return this.withOpt('-fd', time)
     }
 
-    withCallMaxium(maximum) {
+    withCallMax(maximum) {
         return this.withOpt('-m', maximum)
     }
 

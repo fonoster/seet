@@ -3,7 +3,7 @@
 
 <scenario name="instant message">
     <send retrans="500">
-        <![CDATA[MESSAGE sip:[field0] SIP/2.0
+        <![CDATA[MESSAGE sip:[field1] SIP/2.0
             Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
             Max-Forwards: 70
             From: "sipp" <sip:[field0]>;tag=[call_number]

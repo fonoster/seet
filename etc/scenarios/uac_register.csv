@@ -1,4 +1,4 @@
 SEQUENTIAL
-1001;sip.local;[authentication username=1001 password=1234]
 1002;sip.local;[authentication username=1002 password=1234]
+1001;sip.local;[authentication username=1001 password=1234]
 4001;sip2.local;[authentication username=4001 password=1234]
