@@ -9,4 +9,4 @@ const transportMode = 't1'
 
 veredict(uac_register_guest(dutHost, transportMode))
 veredict(uac_register(dutHost, transportMode))
-veredict(ims(dutHost, 'u1'))
+//veredict(ims(dutHost, transportMode))

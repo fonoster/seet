@@ -10,7 +10,7 @@ function test(dutHost, transportMode) {
           .startAsync((error, stdout, stderr) => {
               if (error) {
                   //console.error(`exec error: ${error}`)
-                  // TODO: End instance after 
+                  // TODO: End instance after
                   return
               }
           })
