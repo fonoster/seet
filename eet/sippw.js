@@ -8,7 +8,7 @@ class SIPpW {
         this.opts.set('-r', 1)
         this.opts.set('-m', 1)
         this.opts.set('-l', 1)
-        this.cmd = `docker run -t -p ${localPort}:${localPort}/udp -v $PWD:/sipp ctaloi/sipp ${remoteHost}`
+        this.cmd = `docker run -t -p ${localPort}:${localPort} -p ${localPort}:${localPort}/udp -v $PWD:/sipp ctaloi/sipp ${remoteHost}`
         this.timeout = timeout
     }
 
@@ -18,6 +18,10 @@ class SIPpW {
 
     withTraceStat() {
         return this.withOpt('-trace_stat ', '')
+    }
+
+    withTraceError() {
+        return this.withOpt('-trace_err ', '')
     }
 
     withTraceScreen() {
@@ -76,6 +80,7 @@ class SIPpW {
 
     start() {
         const cmd = this.build()
+        console.log(`cmd ${cmd}`)
         let result
         try {
             result = execSync(cmd, { timeout: this.timeout })
@@ -88,6 +93,7 @@ class SIPpW {
 
     startAsync(callback) {
         const cmd = this.build()
+        console.log(`cmd ${cmd}`)
         return exec(cmd, { timeout: this.timeout }, callback)
     }
 
