@@ -1,9 +1,13 @@
+require('dotenv').config()
 const SIPpW = require('./sippw')
 const assert = require('assert')
 
 describe('UAC Registration', () => {
+    const dutHost = process.env.DUT_HOST
+    console.log(`dutHost ${dutHost}`)
+
     it('guest uac registration', done => {
-        const result = new SIPpW('192.168.1.149')
+        const result = new SIPpW(dutHost)
             .withScenario('etc/scenarios/uac_register_guest.xml')
             .start()
 
@@ -15,7 +19,7 @@ describe('UAC Registration', () => {
     })
 
     it('uac register to domain', done => {
-        const result = new SIPpW('192.168.1.149')
+        const result = new SIPpW(dutHost)
             .withScenario('etc/scenarios/uac_register.xml')
             .withInf('etc/scenarios/register.csv')
             .start()

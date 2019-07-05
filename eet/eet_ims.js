@@ -1,3 +1,4 @@
+require('dotenv').config()
 const assert = require('assert')
 const sleep = require('sleep')
 const SIPpW = require('./sippw')
@@ -12,11 +13,11 @@ const RoutrClient = require('./routr-client')
  */
 describe('UAC IMS', () => {
 
-    const apiUrl = 'https://127.0.01:4567/api/v1beta1'
+    const apiUrl = 'https://127.0.0.1:4567/api/v1beta1'
     const apiToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.TZZ4kp5xIdYzs5RRt6_qVxJcOiLdk1IEHFMBSZ7SRENx6kyVhwfAlm-oeM4L2XFIr4evlTCxKEIKc0fZKwPcjw"
     const route = {
         user: '1002',
-        address: '192.168.1.149',
+        address: process.env.DUT_HOST,
         port: 5090,
         expires: 3600
     }
@@ -32,7 +33,7 @@ describe('UAC IMS', () => {
 
     it('uac sends message request thru proxy server', done => {
 
-        const dutHost = route.address
+        const dutHost = process.env.DUT_HOST
 
         new SIPpW(dutHost, route.port, 20000)
             .withScenario('etc/scenarios/uas_ims.xml')
