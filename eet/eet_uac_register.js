@@ -9,6 +9,7 @@ function test(dutHost, transportMode) {
         .withInf('etc/scenarios/register.csv')
         .withTransportMode(transportMode)
         .start()
+
     return {
         name: testName,
         result: result

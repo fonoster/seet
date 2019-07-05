@@ -9,7 +9,7 @@ const apiToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.TZZ4kp5xIdYzs5RRt6_q
  * There seems to be an issue with NIOMessageProcessorFactory that creates TCP/UDP connections issues.
  * You willl see messages like "WARN - Old socket local ip address /192.168.1.149:51842" in Routr logs
  *
- * As a workaround just change message processor factory like so: 
+ * As a workaround just change message processor factory like so:
  * gov.nist.javax.sip.MESSAGE_PROCESSOR_FACTORY=gov.nist.javax.sip.stack.OIOMessageProcessorFactory
  */
 async function test(dutHost, transportMode) {
