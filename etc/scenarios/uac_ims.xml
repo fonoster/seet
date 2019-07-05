@@ -3,11 +3,11 @@
 
 <scenario name="instant message">
     <send retrans="500">
-        <![CDATA[MESSAGE sip:1002@sip.local SIP/2.0
+        <![CDATA[MESSAGE sip:[field0]@guest SIP/2.0
             Via: SIP/2.0/[transport] [local_ip]:[local_port];rport;branch=a[branch]
             Max-Forwards: 70
-            From: "sipp" <sip:1001@sip.local>;tag=[call_number]
-            To: "dut" <sip:1002@sip.local>
+            From: "sipp" <sip:guest0@guest>;tag=[call_number]
+            To: "dut" <sip:[field0]@guest>
             Call-ID: [call_id]
             CSeq: 1 MESSAGE
             Subject: Performance Test

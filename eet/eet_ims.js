@@ -15,8 +15,8 @@ describe('UAC IMS', () => {
 
     const apiUrl = 'https://127.0.0.1:4567/api/v1beta1'
     const apiToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.TZZ4kp5xIdYzs5RRt6_qVxJcOiLdk1IEHFMBSZ7SRENx6kyVhwfAlm-oeM4L2XFIr4evlTCxKEIKc0fZKwPcjw"
-    const route = {
-        user: '1002',
+    const uasRoute = {
+        user: 'guest',
         address: process.env.DUT_HOST,
         port: 5090,
         expires: 3600
@@ -24,18 +24,18 @@ describe('UAC IMS', () => {
     const client = new RoutrClient(apiUrl)
 
     before(async() => {
-        await client.withToken(apiToken).addLocation('sip:1002@sip.local', route)
+        await client.withToken(apiToken).addLocation('sip:guest@guest', uasRoute)
     })
 
     after(async() => {
-        await client.withToken(apiToken).removeLocation('sip:1002@sip.local')
+        await client.withToken(apiToken).removeLocation('sip:guest@guest')
     });
 
     it('uac sends message request thru proxy server', done => {
 
         const dutHost = process.env.DUT_HOST
 
-        new SIPpW(dutHost, route.port, 20000)
+        new SIPpW(dutHost, uasRoute.port, 20000)
             .withScenario('etc/scenarios/uas_ims.xml')
             .withTraceError()
             .startAsync((error, stdout, stderr) => {
@@ -48,6 +48,7 @@ describe('UAC IMS', () => {
 
         const result = new SIPpW(dutHost)
             .withScenario('etc/scenarios/uac_ims.xml')
+            .withInf('etc/scenarios/register_guest.csv')
             .withTraceError()
             .start()
 

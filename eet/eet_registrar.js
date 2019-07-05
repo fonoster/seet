@@ -9,6 +9,7 @@ describe('UAC Registration', () => {
     it('guest uac registration', done => {
         const result = new SIPpW(dutHost)
             .withScenario('etc/scenarios/uac_register_guest.xml')
+            .withInf('etc/scenarios/register_guest.csv')
             .start()
 
         if (result.stderr) {
