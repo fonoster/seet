@@ -5,6 +5,7 @@
 
 # Other
 node_modules
+*.log
 *.tar.gz
 *.zip
 build

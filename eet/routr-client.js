@@ -1,5 +1,8 @@
 const axios = require('axios')
 
+/**
+ * Oversimplified version of a Routr API Client
+ */
 class RoutrClient {
 
     constructor(apiUrl) {
