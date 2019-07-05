@@ -5,11 +5,11 @@
 
     <send retrans="500">
         <![CDATA[
-            REGISTER sip:[field1] SIP/2.0
-            Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+            REGISTER sip:guest@guest SIP/2.0
+            Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=a[branch]
             Max-Forwards: 70
-            From: "sipp" <sip:[field0]@[field1]>;tag=[call_number]
-            To: "sipp" <sip:[field0]@[field1]>
+            From: "guest" <sip:guest@guest>;tag=[call_number]
+            To: "guest" <sip:guest@guest>
             Call-ID: reg///[call_id]
             CSeq: 7 REGISTER
             Contact: <sip:sipp@[local_ip]:[local_port]>

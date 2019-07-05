@@ -5,14 +5,11 @@ function test(dutHost, transportMode) {
 
     const result = new SIPpW(dutHost)
       .withScenario('etc/scenarios/uac_register.xml')
-        .withInf('etc/scenarios/uac_register.csv')
-          .withTransportMode(transportMode)
-            .start()
-
-    return {
-      name: testName,
-      result: result
-    }
+        .withTraceError()
+          .withInf('etc/scenarios/register.csv')
+            .withTransportMode(transportMode)
+              .start()
+    return { name: testName, result: result }
 }
 
 module.exports = test

@@ -2,13 +2,13 @@ const { execSync } = require('child_process')
 const { exec } = require('child_process')
 
 class SIPpW {
-    constructor(remoteHost, localPort = Math.floor(Math.random() * 6000) + 5080, timeout = 10000) {
+    constructor(remoteHost, localPort = Math.floor(Math.random() * 6000) + 5080, timeout = 20000) {
         this.opts = new Map()
         this.opts.set('-p', localPort)
         this.opts.set('-r', 1)
         this.opts.set('-m', 1)
         this.opts.set('-l', 1)
-        this.cmd = `docker run -t -p ${localPort}:${localPort} -p ${localPort}:${localPort}/udp -v $PWD:/sipp ctaloi/sipp ${remoteHost}`
+        this.cmd = `docker run --stop-timeout ${timeout} -t -p ${localPort}:${localPort} -p ${localPort}:${localPort}/udp -v $PWD:/sipp ctaloi/sipp ${remoteHost}`
         this.timeout = timeout
     }
 
@@ -80,7 +80,6 @@ class SIPpW {
 
     start() {
         const cmd = this.build()
-        console.log(`cmd ${cmd}`)
         let result
         try {
             result = execSync(cmd, { timeout: this.timeout })
@@ -93,7 +92,6 @@ class SIPpW {
 
     startAsync(callback) {
         const cmd = this.build()
-        console.log(`cmd ${cmd}`)
         return exec(cmd, { timeout: this.timeout }, callback)
     }
 
