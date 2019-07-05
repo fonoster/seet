@@ -1,10 +1,10 @@
 {
-  "name": "miniroutr",
+  "name": "seet",
   "version": "1.0.0",
   "description": "End to end testing for Routr server",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -t 10000 eet/eet_registrar.js eet/eet_ims.js"
   },
   "repository": {
     "type": "git",
