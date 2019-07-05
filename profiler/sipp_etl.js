@@ -4,13 +4,13 @@ const moment = require('moment')
 function extract(filename) {
     const result = require('fs').readFileSync(filename, 'utf-8')
         .split('\n')
-            .filter(Boolean);
+        .filter(Boolean);
     return result
 }
 
 function transform(data) {
     const result = []
-    for(i = 1; i < data.length; i++) {
+    for (i = 1; i < data.length; i++) {
         const row = data[i]
         let sampleTime = row.split('\t')[2].split('.')[0]
         sampleTime = moment(sampleTime * 1000).format('YYYY-MM-DD h:mm:ss')

@@ -1,5 +1,7 @@
-const { execSync } = require('child_process')
-const { exec } = require('child_process')
+const {
+    execSync,
+    exec
+} = require('child_process')
 
 class SIPpW {
     constructor(remoteHost, localPort = Math.floor(Math.random() * 6000) + 5080, timeout = 20000) {
@@ -72,7 +74,7 @@ class SIPpW {
         let opts = ''
 
         for (const [key, value] of this.opts) {
-          opts = `${opts} ${key} ${value}`
+            opts = `${opts} ${key} ${value}`
         }
 
         return `${this.cmd} ${opts}`
@@ -82,8 +84,10 @@ class SIPpW {
         const cmd = this.build()
         let result
         try {
-            result = execSync(cmd, { timeout: this.timeout })
-        } catch(e) {
+            result = execSync(cmd, {
+                timeout: this.timeout
+            })
+        } catch (e) {
             result = e
         }
 
@@ -92,7 +96,9 @@ class SIPpW {
 
     startAsync(callback) {
         const cmd = this.build()
-        return exec(cmd, { timeout: this.timeout }, callback)
+        return exec(cmd, {
+            timeout: this.timeout
+        }, callback)
     }
 
     stop() {

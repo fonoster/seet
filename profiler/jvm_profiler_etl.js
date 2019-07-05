@@ -10,13 +10,13 @@ const memMetric = jsonObj => jsonObj.heapMemoryCommitted > 0 ?
 function extract(filename) {
     const result = require('fs').readFileSync(filename, 'utf-8')
         .split('\n')
-            .filter(Boolean);
+        .filter(Boolean);
     return result
 }
 
 function transform(data) {
     const result = []
-    for(i = 0; i < data.length; i++) {
+    for (i = 0; i < data.length; i++) {
         const jsonObj = JSON.parse(data[i])
         const elapsedTime = moment(new Date(jsonObj.epochMillis)).format('YYYY-MM-DD h:mm:ss')
         result.push('CPU' + '\t' + elapsedTime + '\t' + cpuMetric(jsonObj))

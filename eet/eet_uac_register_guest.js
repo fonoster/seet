@@ -4,11 +4,14 @@ function test(dutHost, transportMode) {
     const testName = 'UAC Guest registration'
 
     const result = new SIPpW(dutHost)
-      .withScenario('etc/scenarios/uac_register_guest.xml')
+        .withScenario('etc/scenarios/uac_register_guest.xml')
         .withTransportMode(transportMode)
-          .start()
+        .start()
 
-    return { name: testName, result: result }
+    return {
+        name: testName,
+        result: result
+    }
 }
 
 module.exports = test

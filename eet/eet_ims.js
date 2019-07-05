@@ -14,35 +14,43 @@ const apiToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.TZZ4kp5xIdYzs5RRt6_q
  */
 async function test(dutHost, transportMode) {
     const testName = 'UAC to UAS IMS'
-    const route = { user: '1002', address: dutHost, port: 5090, expires: 3600 }
+    const route = {
+        user: '1002',
+        address: dutHost,
+        port: 5090,
+        expires: 3600
+    }
     const client = new RoutrClient(apiUrl)
 
     // Add uas to location table
     await client.withToken(apiToken).addLocation('sip:1002@sip.local', route)
 
     new SIPpW(dutHost, route.port, 20000)
-      .withScenario('etc/scenarios/uas_ims.xml')
+        .withScenario('etc/scenarios/uas_ims.xml')
         .withTransportMode(transportMode)
-          .withTraceError()
-            .startAsync((error, stdout, stderr) => {
-                if (error) {
-                    console.error(error)
-                    // TODO: End instance after
-                    return
-                }
-            })
+        .withTraceError()
+        .startAsync((error, stdout, stderr) => {
+            if (error) {
+                console.error(error)
+                // TODO: End instance after
+                return
+            }
+        })
 
     sleep.sleep(1)
 
     const result = new SIPpW(dutHost)
-      .withScenario('etc/scenarios/uac_ims.xml')
+        .withScenario('etc/scenarios/uac_ims.xml')
         .withTraceError()
-          .withTransportMode(transportMode)
-            .start()
+        .withTransportMode(transportMode)
+        .start()
 
     await client.withToken(apiToken).removeLocation('sip:1002@sip.local')
 
-    return { name: testName, result: result}
+    return {
+        name: testName,
+        result: result
+    }
 }
 
 module.exports = test
