@@ -4,7 +4,7 @@
   "description": "End to end testing for Routr server",
   "main": "app.js",
   "scripts": {
-    "test": "mocha -t 10000 eet/eet_registrar.js eet/eet_ims.js"
+    "test": "mocha -t 60000 eet/eet_load_*.js"
   },
   "repository": {
     "type": "git",

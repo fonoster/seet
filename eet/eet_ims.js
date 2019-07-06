@@ -1,5 +1,4 @@
 require('dotenv').config()
-const assert = require('assert')
 const sleep = require('sleep')
 const SIPpW = require('./sippw')
 const RoutrClient = require('./routr-client')

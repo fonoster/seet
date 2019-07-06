@@ -4,7 +4,7 @@ const {
 } = require('child_process')
 
 class SIPpW {
-    constructor(remoteHost, localPort = Math.floor(Math.random() * 6000) + 5080, timeout = 20000) {
+    constructor(remoteHost, localPort = Math.floor(Math.random() * 6000) + 5080, timeout = 30000) {
         this.opts = new Map()
         this.opts.set('-p', localPort)
         this.opts.set('-r', 1)
