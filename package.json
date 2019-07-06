@@ -4,8 +4,8 @@
   "description": "End to end testing for Routr server",
   "main": "app.js",
   "scripts": {
-    "pretest": "export NODE_NO_WARNINGS=1"
-    "test": "mocha -t 60000 eet/eet_*.js"
+    "pretest": "export NODE_NO_WARNINGS=1",
+    "test": "mocha -t 60000 eet/eet_registrar.js eet/eet_ims.js eet/eet_load*.js"
   },
   "repository": {
     "type": "git",

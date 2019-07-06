@@ -1,7 +1,7 @@
 require('dotenv').config()
 const sleep = require('sleep')
 const SIPpW = require('./sippw')
-const RoutrClient = require('./routr-client')
+const { populateLoc, cleanLoc } = require('./utils')
 
 /**
  * There seems to be an issue with NIOMessageProcessorFactory that creates TCP/UDP connections issues.
@@ -11,30 +11,16 @@ const RoutrClient = require('./routr-client')
  * gov.nist.javax.sip.MESSAGE_PROCESSOR_FACTORY=gov.nist.javax.sip.stack.OIOMessageProcessorFactory
  */
 describe('UAC IMS', () => {
+    const uasPort = 5090
 
-    const apiUrl = 'https://127.0.0.1:4567/api/v1beta1'
-    const apiToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiJ9.TZZ4kp5xIdYzs5RRt6_qVxJcOiLdk1IEHFMBSZ7SRENx6kyVhwfAlm-oeM4L2XFIr4evlTCxKEIKc0fZKwPcjw"
-    const uasRoute = {
-        user: 'guest',
-        address: process.env.DUT_HOST,
-        port: 5090,
-        expires: 3600
-    }
-    const client = new RoutrClient(apiUrl)
-
-    before(async() => {
-        await client.withToken(apiToken).addLocation('sip:guest@guest', uasRoute)
-    })
-
-    after(async() => {
-        await client.withToken(apiToken).removeLocation('sip:guest@guest')
-    });
+    before(async() => populateLoc(1, uasPort))
+    after(async() => cleanLoc(1))
 
     it('uac sends message request thru proxy server', done => {
 
         const dutHost = process.env.DUT_HOST
 
-        new SIPpW(dutHost, uasRoute.port, 20000)
+        new SIPpW(dutHost, uasPort, 20000)
             .withScenario('etc/scenarios/uas_ims.xml')
             .withTraceError()
             .startAsync((error, stdout, stderr) => {
