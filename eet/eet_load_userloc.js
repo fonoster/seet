@@ -3,7 +3,7 @@ const { cleanLoc, populateLoc } = require('./utils')
 const sleep = require('sleep')
 const SIPpW = require('./sippw')
 
-describe('Performance test', () => {
+describe('Userloc Performance Test', () => {
     const dutHost = process.env.DUT_HOST
     const port = 5090
 
@@ -12,10 +12,11 @@ describe('Performance test', () => {
 
     it('user location lookup (message request)', done => {
 
-        new SIPpW(dutHost, port, 30000)
-            .withCallMax(process.env.MAX_ITERATIONS)
+        new SIPpW(dutHost, port)
             .withScenario('etc/scenarios/uas_ims.xml')
-            .withTraceError()
+            .withCallMax(process.env.MAX_ITERATIONS)
+            .withCallLimit(process.env.CALL_LIMIT)
+            .withCallRate(process.env.MAX_RATE)
             .startAsync((error, stdout, stderr) => {
                 if(error)
                   console.log(stderr)
@@ -24,12 +25,13 @@ describe('Performance test', () => {
         sleep.sleep(1)
 
         const result = new SIPpW(dutHost)
-            .withCallLimit(process.env.CALL_LIMIT)
-            .withCallRate(process.env.MAX_RATE)
-            .withCallMax(process.env.MAX_ITERATIONS)
             .withScenario('etc/scenarios/uac_ims.xml')
             .withInf('etc/scenarios/register_guest.csv')
-            .withTraceError()
+            .withCallMax(process.env.MAX_ITERATIONS)
+            .withCallLimit(process.env.CALL_LIMIT)
+            .withCallRate(process.env.MAX_RATE)
+            .withTimeout(60000)
+            .withTraceScreen()
             .start()
 
         if (result.stderr) {

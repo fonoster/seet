@@ -2,12 +2,10 @@ require('dotenv').config()
 const { cleanLoc } = require('./utils')
 const SIPpW = require('./sippw')
 
-describe('Performance test', () => {
+describe('UAS Registration Performance Test', () => {
     const dutHost = process.env.DUT_HOST
 
-    after(async() => {
-        await cleanLoc()
-    })
+    after(async() => await cleanLoc())
 
     it('new registrations', done => {
         const result = new SIPpW(dutHost)
