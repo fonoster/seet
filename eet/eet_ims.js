@@ -20,7 +20,7 @@ describe('UAC IMS', () => {
 
         const dutHost = process.env.DUT_HOST
 
-        new SIPpW(dutHost, uasPort, 20000)
+        new SIPpW(dutHost, uasPort)
             .withScenario('etc/scenarios/uas_ims.xml')
             .withTraceError()
             .startAsync((error, stdout, stderr) => {
