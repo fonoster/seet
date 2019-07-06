@@ -11,16 +11,13 @@ const { populateLoc, cleanLoc } = require('./utils')
  * gov.nist.javax.sip.MESSAGE_PROCESSOR_FACTORY=gov.nist.javax.sip.stack.OIOMessageProcessorFactory
  */
 describe('UAC IMS', () => {
-    const uasPort = 5090
 
-    before(async() => populateLoc(1, uasPort))
+    before(async() => populateLoc(1, process.env.UAS_PORT))
     after(async() => cleanLoc(1))
 
     it('uac sends message request thru proxy server', done => {
 
-        const dutHost = process.env.DUT_HOST
-
-        new SIPpW(dutHost, uasPort)
+        new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
             .withScenario('etc/scenarios/uas_ims.xml')
             .withTraceError()
             .startAsync((error, stdout, stderr) => {
@@ -31,7 +28,7 @@ describe('UAC IMS', () => {
 
         sleep.sleep(1)
 
-        const result = new SIPpW(dutHost)
+        const result = new SIPpW(process.env.DUT_HOST)
             .withScenario('etc/scenarios/uac_ims.xml')
             .withInf('etc/scenarios/register_guest.csv')
             .withTraceError()

@@ -3,12 +3,11 @@ const { cleanLoc } = require('./utils')
 const SIPpW = require('./sippw')
 
 describe('UAS Registration Performance Test', () => {
-    const dutHost = process.env.DUT_HOST
 
     after(async() => await cleanLoc())
 
     it('new registrations', done => {
-        const result = new SIPpW(dutHost)
+        const result = new SIPpW(process.env.DUT_HOST)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
             .withCallMax(process.env.MAX_ITERATIONS)
@@ -25,7 +24,7 @@ describe('UAS Registration Performance Test', () => {
     })
 
     it('update registration', done => {
-        const result = new SIPpW(dutHost)
+        const result = new SIPpW(process.env.DUT_HOST)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
             .withCallMax(process.env.MAX_ITERATIONS)

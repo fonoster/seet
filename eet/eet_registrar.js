@@ -5,7 +5,7 @@ describe('UAC Registration', () => {
     const dutHost = process.env.DUT_HOST
 
     it('guest uac registration', done => {
-        const result = new SIPpW(dutHost)
+        const result = new SIPpW(process.env.DUT_HOST)
             .withScenario('etc/scenarios/uac_register_guest.xml')
             .withInf('etc/scenarios/register_guest.csv')
             .start()
@@ -18,7 +18,7 @@ describe('UAC Registration', () => {
     })
 
     it('uac register to domain', done => {
-        const result = new SIPpW(dutHost)
+        const result = new SIPpW(process.env.DUT_HOST)
             .withScenario('etc/scenarios/uac_register.xml')
             .withInf('etc/scenarios/register.csv')
             .start()
