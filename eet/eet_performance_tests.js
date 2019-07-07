@@ -5,7 +5,6 @@ const path = require("path")
 const { cleanLoc, populateLoc } = require('./utils')
 const SIPpW = require('./sippw')
 
-
 describe('Basic Performance Tests', function() {
     this.retries(2)
     const uac_register_guest_fn = 'uac_register_guest'
@@ -90,7 +89,7 @@ describe('Basic Performance Tests', function() {
         this.slow(30000)
 
         const result = new SIPpW(process.env.DUT_HOST)
-            .withScenario(`etc/scenarios/${uac_ims}.xml`)
+            .withScenario(`etc/scenarios/${uac_ims_fn}.xml`)
             .withInf('etc/scenarios/register_guest.csv')
             .withCallMax(process.env.MAX_ITERATIONS)
             .withCallLimit(process.env.CALL_LIMIT)

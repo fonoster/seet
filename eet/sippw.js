@@ -11,7 +11,7 @@ class SIPpW {
         this.opts.set('-m', 1)
         this.opts.set('-l', 1)
         this.opts.set('-t', 't1')
-        this.opts.set('-fd', '1')
+        this.opts.set('-fd', '5')
         this.cmd = `docker run --rm -t -p ${localPort}:${localPort} -p ${localPort}:${localPort}/udp -v $PWD:/sipp ctaloi/sipp ${remoteHost}`
         this.timeout = timeout
     }
