@@ -2,11 +2,13 @@ require('dotenv').config()
 const { cleanLoc } = require('./utils')
 const SIPpW = require('./sippw')
 
-describe('UAS Registration Performance Test', () => {
+describe('UAS Registration Performance Test', function() {
+    this.retries(2)
 
     after(async() => await cleanLoc())
 
-    it('new registrations', done => {
+    it('new registrations', function(done)  {
+        this.slow(6000)
         const result = new SIPpW(process.env.DUT_HOST)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
@@ -24,7 +26,8 @@ describe('UAS Registration Performance Test', () => {
         }
     })
 
-    it('update registration', done => {
+    it('update registration', function(done) {
+        this.slow(6000)
         const result = new SIPpW(process.env.DUT_HOST)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)

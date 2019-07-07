@@ -3,13 +3,14 @@ const { cleanLoc, populateLoc } = require('./utils')
 const sleep = require('sleep')
 const SIPpW = require('./sippw')
 
-describe('Userloc Performance Test', () => {
+describe('Userloc Performance Test', function() {
+    this.retries(2)
 
     before(async() => await populateLoc())
     after(async() => await cleanLoc())
 
-    it('user location lookup (message request)', done => {
-
+    it('user location lookup (message request)', function(done) {
+        this.slow(30000)
         new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
             .withScenario('etc/scenarios/uas_ims.xml')
             .withCallMax(process.env.MAX_ITERATIONS)

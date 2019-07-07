@@ -10,13 +10,14 @@ const { populateLoc, cleanLoc } = require('./utils')
  * As a workaround just change message processor factory like so:
  * gov.nist.javax.sip.MESSAGE_PROCESSOR_FACTORY=gov.nist.javax.sip.stack.OIOMessageProcessorFactory
  */
-describe('UAC IMS', () => {
+describe('UAC IMS', function() {
+    this.retries(2)
 
     before(async() => populateLoc(1, process.env.UAS_PORT))
     after(async() => cleanLoc(1))
 
-    it('uac sends message request thru proxy server', done => {
-
+    it('uac sends message request thru proxy server', function(done) {
+        this.slow(6000)
         new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
             .withScenario('etc/scenarios/uas_ims.xml')
             .withTraceError()
