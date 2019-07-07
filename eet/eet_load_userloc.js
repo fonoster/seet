@@ -30,6 +30,7 @@ describe('Userloc Performance Test', () => {
             .withCallRate(process.env.MAX_RATE)
             .withTimeout(60000)
             .withTraceScreen()
+            .withTraceStat()
             .start()
 
         if (result.stderr) {

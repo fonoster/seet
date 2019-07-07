@@ -14,6 +14,7 @@ describe('UAS Registration Performance Test', () => {
             .withScenario('etc/scenarios/uac_register_guest.xml')
             .withInf('etc/scenarios/register_guest.csv')
             .withTraceScreen()
+            .withTraceStat()
             .start()
 
         if (result.stderr) {
@@ -31,6 +32,7 @@ describe('UAS Registration Performance Test', () => {
             .withScenario('etc/scenarios/uac_register_guest.xml')
             .withInf('etc/scenarios/register_guest.csv')
             .withTraceScreen()
+            .withTraceStat()
             .start()
 
         if (result.stderr) {

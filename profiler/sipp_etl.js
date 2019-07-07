@@ -12,7 +12,8 @@ function transform(data) {
     const result = []
     for (i = 1; i < data.length; i++) {
         const row = data[i]
-        let sampleTime = row.split('\t')[2].split('.')[0]
+        let sampleTime = row.split(';')[1].split('\t')[2].split('.')[0]
+        console.log(`sampleTime ${sampleTime}`)
         sampleTime = moment(sampleTime * 1000).format('YYYY-MM-DD h:mm:ss')
         result.push('CPS\t' + sampleTime + '\t' + row.split(';')[6])
     }
