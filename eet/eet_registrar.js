@@ -4,7 +4,7 @@ const SIPpW = require('./sippw')
 describe('UAC Registration', function() {
     this.retries(2)
 
-    it('guest uac registration', function(done) {
+    it('register_guest_uac', function(done) {
         this.slow(6000)
         const result = new SIPpW(process.env.DUT_HOST)
             .withScenario('etc/scenarios/uac_register_guest.xml')
@@ -18,7 +18,7 @@ describe('UAC Registration', function() {
         }
     })
 
-    it('uac register to domain', function(done) {
+    it('register_uac', function(done) {
         this.slow(6000)
         const result = new SIPpW(process.env.DUT_HOST)
             .withScenario('etc/scenarios/uac_register.xml')

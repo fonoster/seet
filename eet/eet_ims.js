@@ -13,21 +13,24 @@ const { populateLoc, cleanLoc } = require('./utils')
 describe('UAC IMS', function() {
     this.retries(2)
 
-    before(async() => populateLoc(1, process.env.UAS_PORT))
-    after(async() => cleanLoc(1))
+    before(async function() {
+       await populateLoc(1, process.env.UAS_PORT)
 
-    it('uac sends message request thru proxy server', function(done) {
+       new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
+           .withScenario('etc/scenarios/uas_ims.xml')
+           .withTraceError()
+           .startAsync((error, stdout, stderr) => {
+               if (error) {
+                   console.error(error)
+               }
+           })
+
+       sleep.sleep(1)
+    })
+    after(async() => await cleanLoc(1))
+
+    it('message_uac_to_uas', function(done) {
         this.slow(6000)
-        new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
-            .withScenario('etc/scenarios/uas_ims.xml')
-            .withTraceError()
-            .startAsync((error, stdout, stderr) => {
-                if (error) {
-                    console.error(error)
-                }
-            })
-
-        sleep.sleep(1)
 
         const result = new SIPpW(process.env.DUT_HOST)
             .withScenario('etc/scenarios/uac_ims.xml')
