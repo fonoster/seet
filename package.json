@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "export NODE_NO_WARNINGS=1 && mocha -t 5000 eet/eet_registrar.js eet/eet_ims.js",
-    "eetest": "export NODE_NO_WARNINGS=1 && mocha -t 120000 eet/eet_performance_tests.js"
+    "eetest": "export NODE_NO_WARNINGS=1 && mocha -t 120000 eet/eet_performance_tests.js",
+    "report": "node profiler/etl.js"
   },
   "repository": {
     "type": "git",
