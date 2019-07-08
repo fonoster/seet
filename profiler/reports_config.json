@@ -1,0 +1,23 @@
+[
+  {
+      "group": [
+        { "etlName": "sippEtl", "source": "out/new_registrations.csv"},
+        { "etlName": "jpEtl", "source": "out/CpuAndMemory.json"}
+      ],
+      "output": "new_registrations"
+  },
+  {
+      "group": [
+        { "etlName": "sippEtl", "source": "out/update_registration.csv"},
+        { "etlName": "jpEtl", "source": "out/CpuAndMemory.json"}
+      ],
+      "output": "update_registration"
+  },
+  {
+      "group": [
+        { "etlName": "sippEtl", "source": "out/user_lookup.csv"},
+        { "etlName": "jpEtl", "source": "out/CpuAndMemory.json"}
+      ],
+      "output": "user_lookup"
+  }
+]

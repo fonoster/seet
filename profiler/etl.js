@@ -2,6 +2,10 @@ const fs = require('fs')
 const lineReader = require('line-reader')
 const sippEtl = require('./sipp_etl')
 const jpEtl = require('./jvm_profiler_etl')
+const reports = require('./reports_config.json')
+
+this.sippEtl = sippEtl
+this.jpEtl = jpEtl
 
 function transformToJS(filenameIn, filenameOut, metric, firstSet = false) {
     const xMatrix = []
@@ -28,13 +32,14 @@ function transformToJS(filenameIn, filenameOut, metric, firstSet = false) {
     })
 }
 
-const reportTsv = 'out/stats_report.tsv'
-const reportCsv = 'out/stats_report.csv'
-const reportJs = 'out/stats_report.js'
-const cpuAndMemory = 'out/CpuAndMemory.json'
+reports.forEach(report => {
+    report.group.forEach( entry => {
+        console.log('working on ' + entry.source + ' and sending it to ' + `${report.output}.tsv`)
+        const etl = this[entry.etlName]
+        etl(entry.source, `out/${report.output}.tsv`)
+    })
 
-sippEtl(reportCsv, reportTsv)
-jpEtl(cpuAndMemory, reportTsv)
-transformToJS(reportTsv, reportJs, 'CPS', true)
-transformToJS(reportTsv, reportJs, 'CPU')
-transformToJS(reportTsv, reportJs, 'MEM')
+    transformToJS(`out/${report.output}.tsv`, `out/${report.output}.js`, 'CPS', true)
+    transformToJS(`out/${report.output}.tsv`, `out/${report.output}.js`, 'CPU')
+    transformToJS(`out/${report.output}.tsv`, `out/${report.output}.js`, 'MEM')
+})
