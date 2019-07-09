@@ -12,7 +12,7 @@
             To: "guest" <sip:[field0]@guest>
             Call-ID: reg///[call_id]
             CSeq: 7 REGISTER
-            Contact: <sip:[field0]@[field1]>
+            Contact: <sip:sipp@[field1]>
             Expires: 3600
             Content-Length: 0
             User-Agent: SIPp

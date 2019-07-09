@@ -16,7 +16,7 @@ function register(done, self) {
         .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
         .withTimeout(120000)
         .withScenario(`etc/scenarios/${uac_register_guest_fn}.xml`)
-        .withInf('etc/scenarios/register_guest.csv')
+        .withInf('etc/scenarios/.register_guest.csv')
         .withTraceScreen()
         .withTraceStat()
         .start()
@@ -31,28 +31,33 @@ function register(done, self) {
 describe('Basic SIP scenarios', function() {
     this.retries(2)
 
-    beforeEach(async function() {
-        if (this.currentTest.title === 'user_lookup') {
-            new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
-                .withScenario('etc/scenarios/uas_ims.xml')
-                .withCallMax(process.env.MAX_ITERATIONS)
-                .withCallLimit(process.env.CALL_LIMIT)
-                .withCallRate(process.env.MAX_RATE)
-                .withTraceError()
-                .startAsync((error, stdout, stderr) => {
-                    if(error)
-                      console.log(stderr)
-                })
+    before(async function() {
+        new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
+            .withScenario('etc/scenarios/uas_ims.xml')
+            .withCallMax(process.env.MAX_ITERATIONS)
+            .withCallLimit(process.env.CALL_LIMIT)
+            .withCallRate(process.env.MAX_RATE)
+            .withTraceError()
+            .startAsync((error, stdout, stderr) => {
+                if(error)
+                  console.log(stderr)
+            })
 
-            sleep.sleep(1)
-        }
+        sleep.sleep(1)
+  
+        const data = `SEQUENTIAL,PRINTF=100000\nu%06d;${process.env.UAS_HOST}:${process.env.UAS_PORT}`
+
+        fs.writeFileSync("etc/scenarios/.register_guest.csv", data, (err) => {
+          if (err) console.log(err);
+          console.log("Successfully generated .register_guest.csv");
+        })
+    })
+
+    after(async function() {
+        await cleanLoc()
     })
 
     afterEach(async function() {
-        if (this.currentTest.title === 'user_lookup' ) {
-            await cleanLoc()
-        }
-
         let filename = this.currentTest.title === 'user_lookup'?
           `${uac_ims_fn}`:
           `${uac_register_guest_fn}`
@@ -75,12 +80,11 @@ describe('Basic SIP scenarios', function() {
 
         const result = new SIPpW(process.env.DUT_HOST)
             .withScenario(`etc/scenarios/${uac_ims_fn}.xml`)
-            .withInf('etc/scenarios/register_guest.csv')
+            .withInf('etc/scenarios/.register_guest.csv')
             .withCallMax(process.env.MAX_ITERATIONS)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
             .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
-            .withTimeout(120000)
             .withTraceScreen()
             .withTraceStat()
             .start()
