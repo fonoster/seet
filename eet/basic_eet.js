@@ -10,13 +10,12 @@ const uac_ims_fn = 'uac_ims'
 function register(done, self) {
     self.slow(6000)
     const result = new SIPpW(process.env.DUT_HOST)
-        .withCallLimit(process.env.CALL_LIMIT)
-        .withCallRate(process.env.MAX_RATE)
-        .withCallMax(process.env.MAX_ITERATIONS)
-        .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
-        .withTimeout(300000)
         .withScenario(`etc/scenarios/${uac_register_guest_fn}.xml`)
         .withInf('etc/scenarios/.register_guest.csv')
+        .withCallMax(process.env.MAX_ITERATIONS)
+        .withCallLimit(process.env.CALL_LIMIT)
+        .withCallRate(process.env.MAX_RATE)
+        .withTimeout(300000)
         .withTraceScreen()
         .withTraceStat()
         .start()
@@ -38,7 +37,6 @@ describe('Basic SIP scenarios', function() {
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
             .withTimeout(240000)  // Needs more time because is starting early than any other instance
-            .withTraceError()
             .startAsync((error, stdout, stderr) => {
                 if(error)
                   console.error(stderr)
@@ -46,7 +44,7 @@ describe('Basic SIP scenarios', function() {
 
         sleep.sleep(1)
 
-        const data = `SEQUENTIAL,PRINTF=100000\nu%06d;${process.env.UAS_HOST}:${process.env.UAS_PORT}`
+        const data = `SEQUENTIAL,PRINTF=10000\ng%06du;${process.env.UAS_HOST}:${process.env.UAS_PORT}`
 
         fs.writeFileSync("etc/scenarios/.register_guest.csv", data, (err) => {
           if (err) console.log(err);
@@ -72,11 +70,11 @@ describe('Basic SIP scenarios', function() {
           path.resolve(__dirname,`../out/${this.currentTest.title}_screen.log`))
     })
 
-    it('new_registrations', done => register(done, this))
+    it.only('new_registrations', done => register(done, this))
 
     it('update_registrations', done => register(done, this))
 
-    it('user_lookup', function(done) {
+    it.only('user_lookup', function(done) {
         this.slow(30000)
 
         const result = new SIPpW(process.env.DUT_HOST)
@@ -85,10 +83,9 @@ describe('Basic SIP scenarios', function() {
             .withCallMax(process.env.MAX_ITERATIONS)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
-            .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
             .withTraceScreen()
-            .withTimeout(120000)
             .withTraceStat()
+            .withTimeout(120000)
             .start()
 
         if (result.stderr) {
