@@ -4,16 +4,35 @@ const fs = require('fs-extra')
 const path = require("path")
 const { cleanLoc, populateLoc } = require('./utils')
 const SIPpW = require('./sippw')
+const uac_register_guest_fn = 'uac_register_guest'
+const uac_ims_fn = 'uac_ims'
+
+function register(done, self) {
+    self.slow(6000)
+    const result = new SIPpW(process.env.DUT_HOST)
+        .withCallLimit(process.env.CALL_LIMIT)
+        .withCallRate(process.env.MAX_RATE)
+        .withCallMax(process.env.MAX_ITERATIONS)
+        .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
+        .withTimeout(120000)
+        .withScenario(`etc/scenarios/${uac_register_guest_fn}.xml`)
+        .withInf('etc/scenarios/register_guest.csv')
+        .withTraceScreen()
+        .withTraceStat()
+        .start()
+
+    if (result.stderr) {
+        done (result)
+    } else {
+        done()
+    }
+}
 
 describe('Basic SIP scenarios', function() {
     this.retries(2)
-    const uac_register_guest_fn = 'uac_register_guest'
-    const uac_ims_fn = 'uac_ims'
 
     beforeEach(async function() {
         if (this.currentTest.title === 'user_lookup') {
-            await populateLoc()
-
             new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
                 .withScenario('etc/scenarios/uas_ims.xml')
                 .withCallMax(process.env.MAX_ITERATIONS)
@@ -30,8 +49,7 @@ describe('Basic SIP scenarios', function() {
     })
 
     afterEach(async function() {
-        if (this.currentTest.title === 'update_registrations' ||
-            this.currentTest.title === 'user_lookup' ) {
+        if (this.currentTest.title === 'user_lookup' ) {
             await cleanLoc()
         }
 
@@ -48,47 +66,9 @@ describe('Basic SIP scenarios', function() {
           path.resolve(__dirname,`../out/${this.currentTest.title}_screen.log`))
     })
 
-    it('new_registrations', function(done)  {
-        this.slow(6000)
-        const result = new SIPpW(process.env.DUT_HOST)
-            .withCallLimit(process.env.CALL_LIMIT)
-            .withCallRate(process.env.MAX_RATE)
-            .withCallMax(process.env.MAX_ITERATIONS)
-            .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
-            .withTimeout(120000)
-            .withScenario(`etc/scenarios/${uac_register_guest_fn}.xml`)
-            .withInf('etc/scenarios/register_guest.csv')
-            .withTraceScreen()
-            .withTraceStat()
-            .start()
+    it('new_registrations', done => register(done, this))
 
-        if (result.stderr) {
-            done (result)
-        } else {
-            done()
-        }
-    })
-
-    it('update_registrations', function(done) {
-        this.slow(6000)
-        const result = new SIPpW(process.env.DUT_HOST)
-            .withCallLimit(process.env.CALL_LIMIT)
-            .withCallRate(process.env.MAX_RATE)
-            .withCallMax(process.env.MAX_ITERATIONS)
-            .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
-            .withTimeout(120000)
-            .withScenario(`etc/scenarios/${uac_register_guest_fn}.xml`)
-            .withInf('etc/scenarios/register_guest.csv')
-            .withTraceScreen()
-            .withTraceStat()
-            .start()
-
-        if (result.stderr) {
-            done (result)
-        } else {
-            done()
-        }
-    })
+    it('update_registrations', done => register(done, this))
 
     it('user_lookup', function(done) {
         this.slow(30000)
