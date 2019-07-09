@@ -14,7 +14,7 @@ function transform(data) {
         const row = data[i]
         let sampleTime = row.split(';')[1].split('\t')[2].split('.')[0]
         sampleTime = moment(sampleTime * 1000).format('YYYY-MM-DD h:mm:ss')
-        const value = row.split(';')[6] / 1000 // We have to "descale" de number to fill the graphics
+        const value = row.split(';')[6] / 5 // We have to "descale" de number to fill the graphics
         result.push('CPS\t' + sampleTime + '\t' + value)
     }
     return result
