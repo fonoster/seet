@@ -10,14 +10,15 @@ const uac_ims_fn = 'uac_ims'
 function register(done, self) {
     self.slow(6000)
     const result = new SIPpW(process.env.DUT_HOST)
-        .withScenario(path.resolve(__dirname,`../scenarios/${uac_register_guest_fn}.xml`))
-        .withInf(path.resolve(__dirname,'../scenarios/.register_guest.csv'))
+        .withScenario(`scenarios/${uac_register_guest_fn}.xml`)
+        .withInf('scenarios/.register_guest.csv')
         .withCallMax(process.env.MAX_ITERATIONS)
         .withCallLimit(process.env.CALL_LIMIT)
         .withCallRate(process.env.MAX_RATE)
         .withTimeout(300000)
         .withTraceScreen()
         .withTraceStat()
+        .withTraceError()
         .start()
 
     if (result.stderr) {
@@ -32,7 +33,7 @@ describe('Basic SIP scenarios', function() {
 
     before(() => {
         new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
-            .withScenario(path.resolve(__dirname,'../scenarios/uas_ims.xml'))
+            .withScenario('scenarios/uas_ims.xml')
             .withCallMax(process.env.MAX_ITERATIONS)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
@@ -46,10 +47,7 @@ describe('Basic SIP scenarios', function() {
 
         const data = `SEQUENTIAL,PRINTF=10000\ng%06du;${process.env.UAS_HOST}:${process.env.UAS_PORT}`
 
-        fs.writeFileSync(path.resolve(__dirname,'../scenarios/.register_guest.csv'), data, (err) => {
-          if (err) console.log(err);
-          console.log("Successfully generated .register_guest.csv");
-        })
+        fs.writeFileSync(path.resolve(__dirname,'../scenarios/.register_guest.csv'), data)
     })
 
     after(async function() {
@@ -61,26 +59,26 @@ describe('Basic SIP scenarios', function() {
           `${uac_ims_fn}`:
           `${uac_register_guest_fn}`
 
+          /*
         // Copy report status to the out folder
         fs.copySync(path.resolve(__dirname,`../scenarios/${filename}_1_.csv`),
           path.resolve(__dirname,`../out/${this.currentTest.title}.csv`))
 
         // Copy the screen result to the out folder
         fs.copySync(path.resolve(__dirname,`../scenarios/${filename}_1_screen.log`),
-          path.resolve(__dirname,`../out/${this.currentTest.title}_screen.log`))
+          path.resolve(__dirname,`../out/${this.currentTest.title}_screen.log`))*/
     })
 
-    it.only('new_registrations', done => register(done, this))
+    it('new_registrations', done => register(done, this))
 
     it('update_registrations', done => register(done, this))
 
-    it.only('user_lookup', function(done) {
+    it('user_lookup', function(done) {
         this.slow(30000)
 
         const result = new SIPpW(process.env.DUT_HOST)
-
-            .withScenario(path.resolve(__dirname,`../scenarios/${uac_ims_fn}.xml`))
-            .withInf(path.resolve(__dirname,'../scenarios/.register_guest.csv'))
+            .withScenario(`scenarios/${uac_ims_fn}.xml`)
+            .withInf('scenarios/.register_guest.csv')
             .withCallMax(process.env.MAX_ITERATIONS)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
