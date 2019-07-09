@@ -14,7 +14,7 @@ function register(done, self) {
         .withCallRate(process.env.MAX_RATE)
         .withCallMax(process.env.MAX_ITERATIONS)
         .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
-        .withTimeout(120000)
+        .withTimeout(300000)
         .withScenario(`etc/scenarios/${uac_register_guest_fn}.xml`)
         .withInf('etc/scenarios/.register_guest.csv')
         .withTraceScreen()
@@ -31,20 +31,21 @@ function register(done, self) {
 describe('Basic SIP scenarios', function() {
     this.retries(2)
 
-    before(async function() {
+    before(() => {
         new SIPpW(process.env.DUT_HOST, process.env.UAS_PORT)
             .withScenario('etc/scenarios/uas_ims.xml')
             .withCallMax(process.env.MAX_ITERATIONS)
             .withCallLimit(process.env.CALL_LIMIT)
             .withCallRate(process.env.MAX_RATE)
+            .withTimeout(240000)  // Needs more time because is starting early than any other instance
             .withTraceError()
             .startAsync((error, stdout, stderr) => {
                 if(error)
-                  console.log(stderr)
+                  console.error(stderr)
             })
 
         sleep.sleep(1)
-  
+
         const data = `SEQUENTIAL,PRINTF=100000\nu%06d;${process.env.UAS_HOST}:${process.env.UAS_PORT}`
 
         fs.writeFileSync("etc/scenarios/.register_guest.csv", data, (err) => {
@@ -86,6 +87,7 @@ describe('Basic SIP scenarios', function() {
             .withCallRate(process.env.MAX_RATE)
             .withCallRateIncrease(process.env.RATE_INCREASE, process.env.RATE_INCREASE_TIME)
             .withTraceScreen()
+            .withTimeout(120000)
             .withTraceStat()
             .start()
 
