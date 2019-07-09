@@ -23,6 +23,10 @@ class RoutrClient {
     async removeLocation(addressOfRecord, callback) {
         return await axios.delete(`${this.apiUrl}/location/${addressOfRecord}?token=${this.token}`)
     }
+
+    async evictAll() {
+        return await axios.delete(`${this.apiUrl}/location?token=${this.token}`)
+    }
 }
 
 module.exports = RoutrClient
