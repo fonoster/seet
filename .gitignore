@@ -4,9 +4,9 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # Other
-etc/scenarios/.*
-etc/scenarios/*.log
-etc/scenarios/*_1_.csv
+scenarios/.*
+scenarios/*.log
+scenarios/*_1_.csv
 node_modules
 *.log
 *.tar.gz
