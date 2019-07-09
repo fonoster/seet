@@ -5,7 +5,7 @@ const path = require("path")
 const { cleanLoc, populateLoc } = require('./utils')
 const SIPpW = require('./sippw')
 
-describe('Basic Performance Tests', function() {
+describe('Basic SIP scenarios', function() {
     this.retries(2)
     const uac_register_guest_fn = 'uac_register_guest'
     const uac_ims_fn = 'uac_ims'
@@ -19,6 +19,7 @@ describe('Basic Performance Tests', function() {
                 .withCallMax(process.env.MAX_ITERATIONS)
                 .withCallLimit(process.env.CALL_LIMIT)
                 .withCallRate(process.env.MAX_RATE)
+                .withTraceError()
                 .startAsync((error, stdout, stderr) => {
                     if(error)
                       console.log(stderr)
@@ -29,7 +30,7 @@ describe('Basic Performance Tests', function() {
     })
 
     afterEach(async function() {
-        if (this.currentTest.title === 'update_registration' ||
+        if (this.currentTest.title === 'update_registrations' ||
             this.currentTest.title === 'user_lookup' ) {
             await cleanLoc()
         }
@@ -68,7 +69,7 @@ describe('Basic Performance Tests', function() {
         }
     })
 
-    it('update_registration', function(done) {
+    it('update_registrations', function(done) {
         this.slow(6000)
         const result = new SIPpW(process.env.DUT_HOST)
             .withCallLimit(process.env.CALL_LIMIT)
