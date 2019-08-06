@@ -6,7 +6,7 @@
 # Other
 scenarios/.*
 scenarios/*.log
-scenarios/*_1_.csv
+*_.csv
 node_modules
 *.log
 *.tar.gz
