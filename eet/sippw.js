@@ -100,7 +100,8 @@ class SIPpW {
         let result
         try {
             result = execSync(cmd, {
-                timeout: this.timeout
+                timeout: this.timeout,
+                stdio: 'pipe'
             })
         } catch (e) {
             result = e
@@ -112,7 +113,8 @@ class SIPpW {
     startAsync(callback) {
         const cmd = this.build()
         return exec(cmd, {
-            timeout: this.timeout
+            timeout: this.timeout,
+            stdio: 'pipe'
         }, callback)
     }
 
