@@ -11,8 +11,8 @@
       <ereg regexp="^.*path.*$" search_in="hdr" header="Supported" case_indep="true" check_it="true" assign_to="pass"/>
       <ereg regexp="^.*pbx-1@sp.lab.com.*$" search_in="hdr" header="From" case_indep="true" check_it="true" assign_to="pass"/>
       <ereg regexp="^.*pbx-1@sp.lab.com.*$" search_in="hdr" header="To" case_indep="true" check_it="true" assign_to="pass"/>
-      <!--TODO: Ensure it doen't have username or @ symbol-->
-      <ereg regexp="^.*sip:.*;bnc.*$" search_in="hdr" header="Contact" case_indep="true" check_it="true" assign_to="pass"/>
+      <!--NOTE: Keeping this very simple to match IPV4 and IPV6 addresses-->
+      <ereg regexp="&lt;(sips?):([^@]+);bnc&gt;" search_in="hdr" header="Contact" case_indep="true" check_it="true" assign_to="pass"/>
       <test assign_to="pass" variable="pass" compare="equal" value="1" />
     </action>
   </recv>

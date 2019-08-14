@@ -50,6 +50,11 @@ class SIPpW {
         return this.withOpt('-inf', info)
     }
 
+    setInfIndex(info, index) {
+        return this.withOpt('-infindex', `${info} ${index}`)
+    }
+
+
     setVariable(variable, value) {
         return this.withOpt('-set', `${variable} ${value}`)
     }
