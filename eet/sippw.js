@@ -33,6 +33,10 @@ class SIPpW {
         return this.withOpt('-trace_err ', '')
     }
 
+    withTraceMsg() {
+        return this.withOpt('-trace_msg ', '')
+    }
+
     withTraceScreen() {
         return this.withOpt('-trace_screen ', '')
     }
@@ -44,6 +48,10 @@ class SIPpW {
 
     withInf(info) {
         return this.withOpt('-inf', info)
+    }
+
+    setVariable(variable, value) {
+        return this.withOpt('-set', `${variable} ${value}`)
     }
 
     withStats(statsFile) {
@@ -84,7 +92,7 @@ class SIPpW {
             opts = `${opts} ${key} ${value}`
         }
 
-        return `${this.cmd} ${opts}`
+        return `${this.cmd} ${opts} `
     }
 
     start() {

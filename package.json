@@ -4,7 +4,7 @@
   "description": "End to end testing for Routr server",
   "main": "app.js",
   "scripts": {
-    "test": "export NODE_NO_WARNINGS=1 && mocha -t 60000 eet/basic_eet.js",
+    "test": "export NODE_NO_WARNINGS=1 && mocha -t 360000 eet/sc/sip_pbx/registration_mode/tg.js",
     "report": "rm -rf out/*.js out/*.tsv && node profiler/etl.js"
   },
   "repository": {
