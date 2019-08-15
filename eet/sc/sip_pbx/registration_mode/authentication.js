@@ -9,9 +9,5 @@ module.exports = function(done) {
         .withTraceMsg()
         .start()
 
-    if (result.stderr) {
-        done (result)
-    } else {
-        done()
-    }
+    done(result.stderr ? result : void(0))
 }
