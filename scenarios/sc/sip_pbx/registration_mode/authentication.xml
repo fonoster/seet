@@ -3,12 +3,12 @@
 
 <scenario name="SC-IT.Conf.1.1.4: Autghentication">
 
-  <label id="badauth"/>
-  <recv request="REGISTER" />
+    <label id="badauth"/>
+    <recv request="REGISTER" />
     <send><![CDATA[
 
         SIP/2.0 401 Authorization Required
-        [last_Via:]
+        [last_Via:];rport=[local_port];received=[local_ip]
         [last_From:]
         [last_To:];tag=[pid]SIPpTag01[call_number]
         [last_Call-ID:]
@@ -22,7 +22,7 @@
     <recv request="REGISTER" >
           <action>
                   <ereg regexp="Digest .*username=\"([^\"]*)\"" search_in="hdr" header="Authorization:" assign_to="junk,username" />
-                  <lookup assign_to="line" file="users.csv" key="[$username]" />
+                  <lookup assign_to="line" file="gateways.csv" key="[$username]" />
                   <assign assign_to="junk" value="0" />
                   <log message="Received REGISTER from user -[$username]-" />
                   <log message="searching in file at line [$line]: Username: [field0 line=\"[$line]\"] Pass: [field1 line=\"[$line]\"]"/>
@@ -38,7 +38,7 @@
       <![CDATA[
 
         SIP/2.0 200 OK
-        [last_Via:]
+        [last_Via:];rport=[local_port];received=[local_ip]
         [last_From:]
         [last_To:];tag=[call_number]
         [last_Call-ID:]
