@@ -2,15 +2,15 @@
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 
 <scenario name="UAC INVITE">
-
+  <Global variables="from,to" />
   <send retrans="500">
     <![CDATA[
 
-        INVITE sip:2001@sippbx.lab.com;transport=[transport] SIP/2.0
+        INVITE sip:[$to];transport=[transport] SIP/2.0
         Via: SIP/2.0/[transport] [local_ip]:[local_port];rport;branch=[branch]
         Max-Forwards: 70
-        From: "Phone e1" <sip:1001@sippbx.lab.com>;tag=[pid]SIPpTag00[call_number]
-        To: "Phone s1" <sip:2001@sippbx.lab.com>
+        From: <sip:[$from]>;tag=[pid]SIPpTag00[call_number]
+        To: <sip:[$to]>
         Contact: <sip:sipp@[local_ip]:[local_port];transport=[transport]>
         Call-ID: [call_id]
         CSeq: 1 INVITE
@@ -35,10 +35,10 @@
 
   <send>
     <![CDATA[
-      ACK sip:2001@sippbx.lab.com;transport=[transport] SIP/2.0
+      ACK sip:[$to];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
-      From: "Phone e1" <sip:1001@sippbx.lab.com>;tag=[pid]SIPpTag00[call_number]
-      To: "Phone s1" <sip:2001@sippbx.lab.com>[peer_tag_param]
+      From: <sip:[$from]>;tag=[pid]SIPpTag00[call_number]
+      To: <sip:[$to]>[peer_tag_param]
       Call-ID: [call_id]
       CSeq: 1 ACK
       Contact: <sip:sipp@[local_ip]:[local_port];transport=[transport]>
@@ -51,10 +51,10 @@
 
   <send retrans="500">
     <![CDATA[
-      BYE sip:2001@sippbx.lab.com;transport=[transport] SIP/2.0
+      BYE sip:[$to];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
-      From: "Phone e1" <sip:1001@sippbx.lab.com>;tag=[pid]SIPpTag00[call_number]
-      To: "Phone s1" <sip:2001@sippbx.lab.com>[peer_tag_param]
+      From: <sip:[$from]>;tag=[pid]SIPpTag00[call_number]
+      To: <sip:[$to]>[peer_tag_param]
       Call-ID: [call_id]
       CSeq: 2 BYE
       Contact: <sip:sipp@[local_ip]:[local_port];transport=[transport]>

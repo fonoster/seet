@@ -19,6 +19,8 @@ module.exports = function(done) {
     // Send INVITE from phone-e1(1001) to phone-s1(2001)
     const result = new SIPpW(process.env.DUT_HOST)
         .withScenario('scenarios/sc/common/uac_invite.xml')
+        .setVariable('from', process.env.PHONE_E1_AOR)
+        .setVariable('to', process.env.PHONE_S1_AOR)    // This will trigger a DOMAIN_EGRESS via GW sp.lab.com 
         .start()
 
     done(result.stderr ? result : void(0))

@@ -58,7 +58,7 @@ class SIPpW {
 
 
     setVariable(variable, value) {
-        return this.withOpt('-set', `${variable} ${value}`)
+        return this.withOpt(`-set ${variable}`, value)
     }
 
     withStats(statsFile) {
