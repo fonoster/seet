@@ -4,6 +4,12 @@ SEET is an end-to-end testing tool for the SIP protocol, inspired in [pysipp](ht
 I'm currently only covering some very basic scenarios, but I'm looking into to adding useful artifacts
 to help test and troubleshoot any SIP device or software.
 
+## Test environment
+
+Add the following domain names to the `/etc/hosts`
+
+`sp.lab.com:5061`
+
 ## Notes for myself
 
 There seems to be an issue with NIOMessageProcessorFactory that creates TCP/UDP connections issues.
