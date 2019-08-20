@@ -12,6 +12,8 @@ class SIPpW {
         this.opts.set('-l', 1)
         this.opts.set('-t', 't1')
         this.opts.set('-fd', '5')
+        this.opts.set('-trace_err', '')
+        this.opts.set('-trace_msg', '')
         // this.cmd = `docker run --rm -t -p ${localPort}:${localPort} -p ${localPort}:${localPort}/udp -v $PWD:/sipp ctaloi/sipp ${remoteHost}`
         this.cmd = `sipp ${remoteHost}`
         this.timeout = timeout
@@ -29,13 +31,13 @@ class SIPpW {
         return this.withOpt('-trace_stat ', '')
     }
 
-    withTraceError() {
+    /*withTraceError() {
         return this.withOpt('-trace_err ', '')
     }
 
     withTraceMsg() {
         return this.withOpt('-trace_msg ', '')
-    }
+    }*/
 
     withTraceScreen() {
         return this.withOpt('-trace_screen ', '')

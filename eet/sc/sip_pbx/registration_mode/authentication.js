@@ -5,8 +5,6 @@ module.exports = function(done) {
         .withScenario('scenarios/sc/sip_pbx/registration_mode/authentication.xml')
         .withInf('scenarios/sc/common/gateways.csv')
         .setInfIndex('gateways.csv', 0)
-        .withTraceError()
-        .withTraceMsg()
         .start()
 
     done(result.stderr ? result : void(0))
