@@ -4,7 +4,7 @@
   "description": "End to end testing for Routr server",
   "main": "app.js",
   "scripts": {
-    "test": "export NODE_NO_WARNINGS=1 && echo '\n SIPConnect v1.1 - Interop Test Plan' && mocha -s 360000 -t 360000 eet/sc/sip_pbx/basic_calling/tg.js eet/sc/sip_pbx/registration_mode/tg.js eet/sc/sip_pbx/static_mode/tg.js",
+    "test": "export NODE_NO_WARNINGS=1 && echo '\n SIPConnect v1.1 - Interop Test Plan' && mocha -s 460000 -t 360000  eet/sc/sip_pbx/registration_mode/tg.js eet/sc/sip_pbx/static_mode/tg.js eet/sc/sip_pbx/basic_calling/tg.js",
     "report": "rm -rf out/*.js out/*.tsv && node profiler/etl.js"
   },
   "repository": {
