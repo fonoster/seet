@@ -6,4 +6,4 @@ module.exports.cleanLoc = async () => {
     await client.withToken(process.env.ROUTR_API_TOKEN).evictAll()
 }
 
-module.exports.noop = () => {}
+module.exports.noop = (done) => { done() }
