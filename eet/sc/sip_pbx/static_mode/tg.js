@@ -1,10 +1,9 @@
 require('dotenv').config()
-const { cleanLoc } = require('../../../utils')
+const { cleanLoc, noop } = require('../../../utils')
 const dns_lookup = require('./dns_lookup')
 
-function noop(done) { done() }
-
 describe('Test Group 1.2: Static Mode', function() {
+
     after(async () => await cleanLoc())
 
     it('SC-IT.Conf.1.2.1: SP-SSE Address Acquisition by SIP-PBX', done => dns_lookup(done))

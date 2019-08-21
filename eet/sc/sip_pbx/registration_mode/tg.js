@@ -1,12 +1,11 @@
 require('dotenv').config()
-const { cleanLoc } = require('../../../utils')
+const { cleanLoc, noop } = require('../../../utils')
 const registration_setup = require('./registration_setup')
 const maintaining_registration = require('./maintaining_registration')
 const authentication = require('./authentication')
 
-function noop(done) { done() }
-
 describe('Test Group 1.1: Registration Mode', function() {
+
     after(async () => await cleanLoc())
 
     it('SC-IT.Conf.1.1.1: Registration Setup', done => registration_setup(done))
