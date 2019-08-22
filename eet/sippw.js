@@ -120,6 +120,10 @@ class SIPpW {
             result = e
         }
 
+        // Give it some time to close the port
+        const sleep = require('system-sleep')
+        sleep(5000)
+
         return result
     }
 
