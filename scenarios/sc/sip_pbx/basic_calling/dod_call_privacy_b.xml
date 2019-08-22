@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 
-<scenario name="COMMON UAS Responder">
-  <recv request="INVITE" crlf="true" />
+<scenario name="SC-IT.Conf.1.3.4.b: SIPPBX Support for Private when Generating INVITE for Originating DOD Call (Part B)">
+
+  <recv request="INVITE" crlf="true">
+    <action>
+      <ereg regexp="^.*none.*$" search_in="hdr" header="Privacy" case_indep="true" check_it="true" assign_to="pass"/>
+      <test assign_to="pass" variable="pass" compare="equal" value="1" />
+    </action>
+  </recv>
 
   <send>
     <![CDATA[

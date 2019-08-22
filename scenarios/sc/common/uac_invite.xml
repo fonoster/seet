@@ -2,11 +2,12 @@
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 
 <scenario name="UAC INVITE">
-  <Global variables="from,to" />
+  <Global variables="requestURI,from,to" />
+  <!-- The second P-Asserted-Identity is use for test SC-IT.Conf.1.3.2-->
   <send retrans="500">
     <![CDATA[
 
-        INVITE sip:[$to];transport=[transport] SIP/2.0
+        INVITE sip:[$requestURI];transport=[transport] SIP/2.0
         Via: SIP/2.0/[transport] [local_ip]:[local_port];rport;branch=[branch]
         Max-Forwards: 70
         From: <sip:[$from]>;tag=[pid]SIPpTag00[call_number]
@@ -15,6 +16,9 @@
         Call-ID: [call_id]
         CSeq: 1 INVITE
         Content-Type: application/sdp
+        P-Asserted-Identity: <sip:[$from]>
+        P-Asserted-Identity: tel: +1-222-555-3000
+        Privacy: id
         Content-Length: [len]
 
         v=0
@@ -35,7 +39,7 @@
 
   <send>
     <![CDATA[
-      ACK sip:[$to];transport=[transport] SIP/2.0
+      ACK sip:[$requestURI];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       From: <sip:[$from]>;tag=[pid]SIPpTag00[call_number]
       To: <sip:[$to]>[peer_tag_param]
@@ -51,7 +55,7 @@
 
   <send retrans="500">
     <![CDATA[
-      BYE sip:[$to];transport=[transport] SIP/2.0
+      BYE sip:[$requestURI];transport=[transport] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       From: <sip:[$from]>;tag=[pid]SIPpTag00[call_number]
       To: <sip:[$to]>[peer_tag_param]

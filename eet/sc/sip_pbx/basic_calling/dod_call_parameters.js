@@ -1,15 +1,9 @@
 
 module.exports = function(done) {
     const SIPpW = require('../../../sippw')
-    const uasPort = 5061
-
-    // Wait for SIP PBX to register
-    new SIPpW(process.env.DUT_HOST, uasPort, 60000)
-        .withScenario('scenarios/sc/common/uas_register.xml')
-        .start()
 
     // This UAS acts as the SP
-    new SIPpW(process.env.DUT_HOST, uasPort, 120000)
+    new SIPpW(process.env.DUT_HOST, 5061, 120000)
         .withScenario('scenarios/sc/sip_pbx/basic_calling/dod_call_parameters.xml')
         .startAsync((error, stdout, stderr) => {
             if(error)
@@ -19,8 +13,9 @@ module.exports = function(done) {
     // Send INVITE from phone-e1(1001) to phone-s1(2001)
     const result = new SIPpW(process.env.DUT_HOST)
         .withScenario('scenarios/sc/common/uac_invite.xml')
-        .setVariable('from', process.env.PHONE_E1_AOR)
-        .setVariable('to', process.env.PHONE_S1_AOR)    // This will trigger a DOMAIN_EGRESS via GW sp.lab.com
+        .setVariable('requestURI', `${process.env.PHONE_S1_USERNAME}@${process.env.SIPPBX_DOMAIN}`)
+        .setVariable('from', `${process.env.PHONE_E1_USERNAME}@${process.env.SIPPBX_DOMAIN}`)
+        .setVariable('to', `${process.env.PHONE_S1_USERNAME}@${process.env.SIPPBX_DOMAIN}`)
         .start()
 
     done(result.stderr ? result : void(0))

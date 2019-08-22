@@ -2,15 +2,15 @@
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 
 <scenario name="registration">
-
+    <Global variables="domain,username" />
     <send retrans="500">
         <![CDATA[
-            REGISTER sip:[field1] SIP/2.0
-            Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=a[branch]
+            REGISTER sip:[$domain] SIP/2.0
+            Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
             Max-Forwards: 70
-            From: "sipp" <sip:[field0]@[field1]>;tag=[call_number]
-            To: "sipp" <sip:[field0]@[field1]>
-            Call-ID: reg///[call_id]
+            From: "[$username]" <sip:[$username]@[$domain]>;tag=[call_number]
+            To: "[$username]" <sip:[$username]@[$domain]>
+            Call-ID: [call_id]
             CSeq: 7 REGISTER
             Contact: <sip:sipp@[local_ip]:[local_port]>
             Expires: 3600
@@ -27,18 +27,18 @@
 
     <send retrans="500" rtd="true">
         <![CDATA[
-            REGISTER sip:[field1] SIP/2.0
+            REGISTER sip:[$domain] SIP/2.0
             Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
             Max-Forwards: 70
-            From: "sipp" <sip:[field0]@[field1]>;tag=[call_number]
-            To: "sipp" <sip:[field0]@[field1]>
-            Call-ID: reg///[call_id]
+            From: "[$username]" <sip:[$username]@[$domain]>;tag=[call_number]
+            To: "[$username]" <sip:[$username]@[$domain]>
+            Call-ID: [call_id]
             CSeq: 8 REGISTER
             Contact: <sip:sipp@[local_ip]:[local_port]>
             Expires: 3600
             Content-Length: 0
             User-Agent: SIPp
-            [field2]
+            [authentication]
         ]]>
     </send>
 

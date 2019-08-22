@@ -3,7 +3,8 @@ const { cleanLoc } = require('../../../utils')
 const dns_lookup = require('./dns_lookup')
 
 describe('Test Group 1.2: Static Mode', function() {
-    this.retries(4)
+
+    this.retries(process.env.MAX_RETRIES)
 
     after(async () => await cleanLoc())
 

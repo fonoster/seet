@@ -4,19 +4,25 @@ const {
 } = require('child_process')
 
 class SIPpW {
-    constructor(remoteHost, localPort = Math.floor(Math.random() * 6000) + 5080, timeout = 30000) {
+    constructor(remoteHost, localPort = Math.floor(Math.random() * 6000) + 5080, timeout = 60000) {
         this.opts = new Map()
         this.opts.set('-p', localPort)
-        this.opts.set('-r', 1)
         this.opts.set('-m', 1)
-        this.opts.set('-l', 1)
         this.opts.set('-t', 't1')
-        this.opts.set('-fd', '5')
         this.opts.set('-trace_err', '')
         this.opts.set('-trace_msg', '')
+        this.opts.set('-timeout', timeout)
         // this.cmd = `docker run --rm -t -p ${localPort}:${localPort} -p ${localPort}:${localPort}/udp -v $PWD:/sipp ctaloi/sipp ${remoteHost}`
         this.cmd = `sipp ${remoteHost}`
         this.timeout = timeout
+    }
+
+    setUsername(username) {
+        return this.withOpt('-au', username)
+    }
+
+    setPassword(password) {
+        return this.withOpt('-ap', password)
     }
 
     withScenario(scenarioFile) {

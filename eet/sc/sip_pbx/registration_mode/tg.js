@@ -5,7 +5,8 @@ const maintaining_registration = require('./maintaining_registration')
 const authentication = require('./authentication')
 
 describe('Test Group 1.1: Registration Mode', function() {
-    this.retries(4)
+
+    this.retries(process.env.MAX_RETRIES)
 
     after(async () => await cleanLoc())
 
