@@ -14,7 +14,7 @@
   <send>
     <![CDATA[
       SIP/2.0 180 Ringing
-      [last_Via:]
+      [last_Via:];rport=[remote_port];received=[remote_ip]
       [last_From:]
       [last_To:];tag=[pid]SIPpTag01[call_number]
       [last_Call-ID:]
@@ -27,7 +27,7 @@
   <send retrans="500">
     <![CDATA[
       SIP/2.0 200 OK
-      [last_Via:]
+      [last_Via:];rport=[remote_port];received=[remote_ip]
       [last_From:]
       [last_To:];tag=[pid]SIPpTag01[call_number]
       [last_Call-ID:]
@@ -56,7 +56,7 @@
   <send>
     <![CDATA[
       SIP/2.0 200 OK
-      [last_Via:]
+      [last_Via:];rport=[remote_port];received=[remote_ip]
       [last_From:]
       [last_To:];tag=[pid]SIPpTag01[call_number]
       [last_Call-ID:]

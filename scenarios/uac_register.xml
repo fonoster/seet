@@ -13,7 +13,7 @@
             Call-ID: reg///[call_id]
             CSeq: 7 REGISTER
             Contact: <sip:sipp@[local_ip]:[local_port]>
-            Expires: 3600
+            Expires: 60
             Content-Length: 0
             User-Agent: SIPp
         ]]>
@@ -35,7 +35,7 @@
             Call-ID: reg///[call_id]
             CSeq: 8 REGISTER
             Contact: <sip:sipp@[local_ip]:[local_port]>
-            Expires: 3600
+            Expires: 60
             Content-Length: 0
             User-Agent: SIPp
             [field2]

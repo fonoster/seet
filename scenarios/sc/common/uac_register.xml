@@ -13,17 +13,15 @@
             Call-ID: [call_id]
             CSeq: 7 REGISTER
             Contact: <sip:sipp@[local_ip]:[local_port]>
-            Expires: 3600
+            Expires: 60
             Content-Length: 0
             User-Agent: SIPp
         ]]>
     </send>
 
-    <recv response="100" optional="true">
-    </recv>
+    <recv response="100" optional="true" />
 
-    <recv response="401" auth="true" rtd="true">
-    </recv>
+    <recv response="401" auth="true" rtd="true" />
 
     <send retrans="500" rtd="true">
         <![CDATA[
@@ -35,20 +33,16 @@
             Call-ID: [call_id]
             CSeq: 8 REGISTER
             Contact: <sip:sipp@[local_ip]:[local_port]>
-            Expires: 3600
+            Expires: 60
             Content-Length: 0
             User-Agent: SIPp
             [authentication]
         ]]>
     </send>
 
-    <recv response="100" optional="true">
-    </recv>
-
-    <recv response="200" rtd="true">
-    </recv>
-
-    <CallLengthRepartition value="10, 50, 100, 150, 200, 500, 1000"/>
-    <ResponseTimeRepartition value="10, 50, 100, 150, 200, 500, 1000"/>
+    <recv response="100" optional="true" />
+    <recv response="200" rtd="true" />
+    <CallLengthRepartition value="10, 50, 100, 150, 200, 500, 1000" />
+    <ResponseTimeRepartition value="10, 50, 100, 150, 200, 500, 1000" />
 
 </scenario>

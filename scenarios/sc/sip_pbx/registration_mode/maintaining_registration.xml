@@ -7,7 +7,7 @@
   <send>
     <![CDATA[
       SIP/2.0 200 OK
-      [last_Via:];rport=[local_port];received=[local_ip]
+      [last_Via:];rport=[remote_port];received=[remote_ip]
       [last_From:]
       [last_To:]
       [last_Call-ID:]
