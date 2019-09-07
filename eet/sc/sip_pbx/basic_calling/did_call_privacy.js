@@ -1,7 +1,6 @@
 
 module.exports = function(done) {
     const SIPpW = require('../../../sippw')
-
     const enterprisePhonePort = 5062
 
     // Register phone-e1 to DUT
