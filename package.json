@@ -26,6 +26,7 @@
     "hertzy": "^0.1.1",
     "is-port-reachable": "^2.0.1",
     "line-reader": "^0.4.0",
+    "mocha": "^6.2.0",
     "moment": "^2.24.0",
     "shelljs": "^0.8.3",
     "sleep": "^6.1.0",
