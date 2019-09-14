@@ -8,6 +8,7 @@ class SIPpW {
         this.opts = new Map()
         this.opts.set('-p', localPort)
         this.opts.set('-m', 1)
+        this.opts.set('-d', 1)
         this.opts.set('-t', 't1')
         this.opts.set('-trace_err', '')
         this.opts.set('-trace_msg', '')
