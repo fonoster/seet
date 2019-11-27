@@ -25,7 +25,10 @@ module.exports = function(done) {
     // but as far as I'm concern all that matters is that call process without error
     const result = new SIPpW(process.env.DUT_HOST)
         .withScenario('scenarios/common/uac_invite.xml')
-        .setVariable('requestURI', `${process.env.PHONE_E1_USERNAME}@${process.env.SIPPBX_DOMAIN}`)
+        .setVariable('tgtUser', process.env.PHONE_E1_USERNAME)
+        .setVariable('tgtDomain', process.env.SIPPBX_DOMAIN)
+        .setVariable('tgtHost', process.env.DUT_HOST)
+        .setVariable('tgtPort', enterprisePhonePort)
         .setVariable('from', `anonymous@anonymous.invalid`)
         .setVariable('to', `+12225553000@unknown.com`)
         .start()
