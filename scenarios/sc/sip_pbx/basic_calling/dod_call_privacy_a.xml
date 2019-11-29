@@ -5,8 +5,8 @@
 
   <recv request="INVITE" crlf="true">
     <action>
-      <ereg regexp="^.*sip:anonymous@anonymous.invalid.*$" search_in="hdr" header="From" case_indep="true" check_it="true" assign_to="pass"/>
-      <ereg regexp="^.*id.*$" search_in="hdr" header="Privacy" case_indep="true" check_it="true" assign_to="pass"/>      
+      <ereg regexp=".*sip:anonymous@anonymous.invalid.*" search_in="hdr" header="From" case_indep="true" check_it="true" assign_to="pass"/>
+      <ereg regexp=".*id.*" search_in="hdr" header="Privacy" case_indep="true" check_it="true" assign_to="pass"/>
       <test assign_to="pass" variable="pass" compare="equal" value="1" />
     </action>
   </recv>

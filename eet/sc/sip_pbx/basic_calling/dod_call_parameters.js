@@ -5,10 +5,7 @@ module.exports = function(done) {
     // This UAS acts as the SP
     new SIPpW(process.env.DUT_HOST, 5061, 120000)
         .withScenario('scenarios/sc/sip_pbx/basic_calling/dod_call_parameters.xml')
-        .startAsync((error, stdout, stderr) => {
-            if(error)
-              console.error(stderr)
-        })
+        .startAsync((e, out, err) => e ? console.error(err) : void(0))
 
     // Send INVITE from phone-e1(1001) to phone-s1(2001)
     const result = new SIPpW(process.env.DUT_HOST)

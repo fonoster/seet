@@ -106,6 +106,7 @@ class SIPpW {
             opts = `${opts} ${key} ${value}`
         }
 
+        console.log(`${this.cmd} ${opts} `)
         return `${this.cmd} ${opts} `
     }
 

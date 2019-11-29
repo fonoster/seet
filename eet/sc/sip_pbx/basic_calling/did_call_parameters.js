@@ -15,18 +15,15 @@ module.exports = function(done) {
     // UA acts as the enterprise phone
     new SIPpW(process.env.DUT_HOST, enterprisePhonePort)
         .withScenario('scenarios/common/uas_invite.xml')
-        .startAsync((error, stdout, stderr) => {
-            if(error)
-              console.error(stderr)
-        })
+        .startAsync((e, out, err) => e ? console.error(err) : void(0))
 
     // Send INVITE from phone-s1(2001) to phone-e1(1001)
     const result = new SIPpW(process.env.DUT_HOST)
         .withScenario('scenarios/common/uac_invite.xml')
         .setVariable('tgtUser', process.env.PHONE_E1_USERNAME)
         .setVariable('tgtDomain', process.env.SIPPBX_DOMAIN)
-        .setVariable('tgtHost', process.env.DUT_HOST)
-        .setVariable('tgtPort', enterprisePhonePort)        
+        .setVariable('tgtHost', process.env.TESTER_HOST)
+        .setVariable('tgtPort', enterprisePhonePort)
         .setVariable('from', `"+1303661001@${process.env.SP_DOMAIN};user=phone"`)
         .setVariable('to', "+12225553000@unknown.com")
         .start()

@@ -5,7 +5,7 @@
 
   <recv request="INVITE" crlf="true">
     <action>
-      <ereg regexp="^.*none.*$" search_in="hdr" header="Privacy" case_indep="true" check_it="true" assign_to="pass"/>
+      <ereg regexp=".*none.*" search_in="hdr" header="Privacy" case_indep="true" check_it="true" assign_to="pass"/>
       <test assign_to="pass" variable="pass" compare="equal" value="1" />
     </action>
   </recv>

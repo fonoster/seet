@@ -1,0 +1,53 @@
+- apiVersion: v1beta1
+  kind: Gateway
+  metadata:
+    name: Provider Inc.
+    ref: gw50a1a4ca
+  spec:
+    host: sip.provider.net
+    port: 5061
+    transport: tcp
+    credentials:
+      username: 'pbx-1'
+      secret: '1234'
+- apiVersion: v1beta1
+  kind: Number
+  metadata:
+    ref: dd76afc94b
+    gwRef: gw50a1a4ca
+    geoInfo:                  # Replace this using your DID's info
+      city: City, State
+      country: Country
+      countryISOCode: US
+  spec:
+    location:
+      telUrl: 'tel:0000000000'        # Use your DID number as given by your provider
+      aorLink: 'sip:1001@sip.local'
+- apiVersion: v1beta1
+  kind: Domain
+  metadata:
+    name: Local SIP Server
+  spec:
+    context:
+      domainUri: sip.local
+      egressPolicy:
+        rule: .{5,}             # Egress only if callee's aor len is 5 or more
+        numberRef: dd76afc94b      
+- apiVersion: v1beta1
+  kind: Agent
+  metadata:
+    name: John Doe
+  spec:
+    credentials:
+      username: '1001'
+      secret: '1234'
+    domains: [sip.local]
+- apiVersion: v1beta1
+  kind: Agent
+  metadata:
+    name: Janie Doe
+  spec:
+    credentials:
+      username: '1002'
+      secret: '1234'
+    domains: [sip.local]

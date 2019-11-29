@@ -5,10 +5,10 @@
 
   <recv request="INVITE" crlf="true">
     <action>
-      <ereg regexp="^.*INVITE (sips?):[0-9a-zA-Z]+@[sip.lab.com].*$" search_in="msg" case_indep="true" check_it="true" assign_to="pass"/>
-      <ereg regexp="^.*(sips?):[0-9a-zA-Z]+@[sippbx.lab.com].*$" search_in="hdr" header="From" case_indep="true" check_it="true" assign_to="pass"/>
-      <ereg regexp="^.*(sips?):[0-9a-zA-Z]+@[0-9a-zA-Z]+.*$" search_in="hdr" header="To" case_indep="true" check_it="true" assign_to="pass"/>
-      <ereg regexp="^.*(sips?|tel):[0-9a-zA-Z]+@[0-9a-zA-Z]+|(tel):(\+)[\+0-9]+.*$" search_in="hdr" header="P-Asserted-Identity" case_indep="true" check_it="true" assign_to="pass"/>
+      <ereg regexp=".*INVITE (sips?):[0-9a-zA-Z]+@[sip.lab.com].*" search_in="msg" case_indep="true" check_it="true" assign_to="pass"/>
+      <ereg regexp=".*(sips?):[0-9a-zA-Z]+@[sippbx.lab.com].*" search_in="hdr" header="From" case_indep="true" check_it="true" assign_to="pass"/>
+      <ereg regexp=".*(sips?):[0-9a-zA-Z]+@[0-9a-zA-Z]+.*" search_in="hdr" header="To" case_indep="true" check_it="true" assign_to="pass"/>
+      <ereg regexp=".*(sips?|tel):[0-9a-zA-Z]+@[0-9a-zA-Z]+|(tel):(\+)[\+0-9]+.*" search_in="hdr" header="P-Asserted-Identity" case_indep="true" check_it="true" assign_to="pass"/>
       <test assign_to="pass" variable="pass" compare="equal" value="1" />
     </action>
   </recv>

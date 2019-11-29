@@ -15,10 +15,7 @@ module.exports = function(done) {
     // UA acts as the enterprise phone
     new SIPpW(process.env.DUT_HOST, enterprisePhonePort)
         .withScenario('scenarios/common/uas_invite.xml')
-        .startAsync((error, stdout, stderr) => {
-            if(error)
-              console.error(stderr)
-        })
+        .startAsync((e, out, err) => e ? console.error(err) : void(0))
 
     // Send INVITE from phone-s1(2001) to phone-e1(1001)
     // The expected result state that:  The caller ID is displayed as “anonymous”
