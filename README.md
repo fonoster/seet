@@ -1,6 +1,6 @@
 # Routr EET
 
-[![Build Status](https://github.com/fonoster/routr-eet/workflows/build/badge.svg)](https://github.com/fonoster/routr-eet/actions?workflow=build)
+[![End to End Test Suit](https://github.com/fonoster/routr-eet/workflows/build/badge.svg)](https://github.com/fonoster/routr-eet/actions?workflow=build)
 
 Routr EET is a suite for end-to-end testing of Routr Server. It is inspired in [pysipp](https://github.com/SIPp/pysipp).
 We are currently only covering some very basic scenarios, but we are looking into to adding useful artifacts
