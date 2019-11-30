@@ -1,7 +1,5 @@
 name: End to End Test
-on:
-  push:
-    tags: ['1.0.0-rc*']
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
