@@ -6,7 +6,9 @@ module.exports.cleanLoc = async () => {
     const response = await client.getToken(process.env.ROUTR_ADMIN_USERNAME,
         process.env.ROUTR_ADMIN_SECRET)
     if (response.status !== 200) response.err
-    await client.withToken(response.data.data).evictAll()
+    // This is causing the entire table to be deleted.
+    // Change the function to avoid deleting static entries
+    //await client.withToken(response.data.data).evictAll()
 }
 
 module.exports.shutdown = async () => {
