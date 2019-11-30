@@ -5,7 +5,7 @@ COPY . tester
 WORKDIR tester
 
 RUN apk add --update sipp=3.6.0-r0 nodejs npm --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
-  && npm install \
+  && npm install -f \
   && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 EXPOSE 5061
