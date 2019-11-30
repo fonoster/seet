@@ -13,7 +13,6 @@ services:
       sh -c '
         while ! nc -z routr 4567 > /dev/null 2>&1; do sleep 0.1; done # Wait for Routr
         cd tests && npm install && npm test
-        node stop_dut.js
       '
     env_file: .env
     volumes:
@@ -38,6 +37,7 @@ services:
         while ! nc -z routr 4567 > /dev/null 2>&1; do sleep 0.1; done # Wait for Routr
         rctl login https://routr:4567/api/v1beta1 -u admin -p changeit
         rctl create -f /opt/routr/bootstrap.yml
+        while sleep 3600; do :; done
       '
     volumes:
       - ./etc/bootstrap.yml:/opt/routr/bootstrap.yml:ro

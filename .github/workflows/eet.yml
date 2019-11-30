@@ -1,0 +1,12 @@
+name: End to End Test
+on:
+  push:
+    tags: ['1.0.0-rc*']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Test
+        run: docker-compose up --abort-on-container-exit --exit-code-from routr-eet
