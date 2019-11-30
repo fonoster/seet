@@ -13,7 +13,7 @@ services:
       sh -c '
           while ! nc -z routr 4567 > /dev/null 2>&1; do sleep 0.1; done # Wait for Routr
           cd tests && npm install && npm test
-          while sleep 3600; do :; done
+          node stop_dut.js
       '
     env_file: .env
     volumes:
@@ -30,7 +30,6 @@ services:
     expose: [4567, 5060]
     volumes:
       - ./etc/wait-for-it.sh:/opt/routr/wait-for-it.sh:ro
-      - ./etc/log4j2.yml:/opt/routr/config/log4j2.yml:ro      
   routr-provision:
     build:
       context: .provisioner
@@ -39,7 +38,6 @@ services:
         while ! nc -z routr 4567 > /dev/null 2>&1; do sleep 0.1; done # Wait for Routr
         rctl login https://routr:4567/api/v1beta1 -u admin -p changeit
         rctl create -f /opt/routr/bootstrap.yml
-        while sleep 3600; do :; done # Remove this line :P
       '
     volumes:
       - ./etc/bootstrap.yml:/opt/routr/bootstrap.yml:ro

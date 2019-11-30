@@ -25,7 +25,7 @@ class RoutrClient {
     }
 
     async addLocation(addressOfRecord, route, callback) {
-        return await axios.post(`${this.apiUrl}/location/${addressOfRecord}?token=${this.token}`, route)
+        return await axios.post(`${this.apiUrl}/location/${addressOfRecord}?token=${this.token},now=true`, route)
     }
 
     async removeLocation(addressOfRecord, callback) {
@@ -34,6 +34,10 @@ class RoutrClient {
 
     async evictAll() {
         return await axios.delete(`${this.apiUrl}/location?token=${this.token}`)
+    }
+
+    async shutdown() {
+        return await axios.post(`${this.apiUrl}/system/status/down?token=${this.token}`)
     }
 }
 
