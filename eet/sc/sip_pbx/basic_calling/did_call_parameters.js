@@ -13,7 +13,7 @@ module.exports = function(done) {
         .start()
 
     // UA acts as the enterprise phone
-    new SIPpW(process.env.DUT_HOST, enterprisePhonePort)
+    new SIPpW(void(0), enterprisePhonePort)
         .withScenario('scenarios/common/uas_invite.xml')
         .startAsync((e, out, err) => e ? console.error(err) : void(0))
 

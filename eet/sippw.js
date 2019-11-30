@@ -14,7 +14,7 @@ class SIPpW {
         this.opts.set('-trace_msg', '')
         this.opts.set('-timeout', timeout)
         // this.cmd = `docker run --rm -t -p ${localPort}:${localPort} -p ${localPort}:${localPort}/udp -v $PWD:/sipp ctaloi/sipp ${remoteHost}`
-        this.cmd = `sipp ${remoteHost}`
+        this.cmd = remoteHost ? `sipp ${remoteHost}` : 'sipp'
         this.timeout = timeout
     }
 
@@ -106,7 +106,6 @@ class SIPpW {
             opts = `${opts} ${key} ${value}`
         }
 
-        console.log(`${this.cmd} ${opts} `)
         return `${this.cmd} ${opts} `
     }
 

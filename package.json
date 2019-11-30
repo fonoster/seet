@@ -2,7 +2,6 @@
   "name": "seet",
   "version": "1.0.0",
   "description": "End to end testing for Routr server",
-  "main": "app.js",
   "scripts": {
     "test": "export NODE_NO_WARNINGS=1 && echo '\n SIPConnect v1.1 - Interop Test Plan' && mocha -s 460000 -t 360000  eet/sc/sip_pbx/registration_mode/tg.js eet/sc/sip_pbx/static_mode/tg.js eet/sc/sip_pbx/basic_calling/tg.js eet/sc/sip_pbx/basic_features/tg.js eet/load_tests",
     "report": "rm -rf out/*.js out/*.tsv && node profiler/etl.js"
@@ -19,6 +18,7 @@
   "homepage": "https://github.com/psanders/seet#readme",
   "dependencies": {
     "axios": "^0.19.0",
+    "btoa": "^1.2.1",
     "colors": "^1.3.3",
     "dotenv": "^8.0.0",
     "fast-csv": "^3.0.1",

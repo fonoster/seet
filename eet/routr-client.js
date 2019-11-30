@@ -1,4 +1,5 @@
 const axios = require('axios')
+const btoa = require('btoa')
 
 /**
  * Oversimplified version of a Routr API Client
@@ -14,6 +15,13 @@ class RoutrClient {
     withToken(token) {
         this.token = token
         return this
+    }
+
+    async getToken(username, password) {
+        return await axios.create({
+            baseURL: `${this.apiUrl}/token`,
+            headers: {'Authorization': `Basic ${btoa(username + ':' + password)}`}
+        }).get()
     }
 
     async addLocation(addressOfRecord, route, callback) {
