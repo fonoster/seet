@@ -1,16 +1,16 @@
-# SEET
+# Routr EET
 
-SEET is an end-to-end testing tool for the SIP protocol, inspired in [pysipp](https://github.com/SIPp/pysipp).
-I'm currently only covering some very basic scenarios, but I'm looking into to adding useful artifacts
+Routr EET is a suite for end-to-end testing of Routr Server. It is inspired in [pysipp](https://github.com/SIPp/pysipp).
+We are currently only covering some very basic scenarios, but we are looking into to adding useful artifacts
 to help test and troubleshoot any SIP device or software.
 
 ## Test environment
 
 Add the following domain names to the `/etc/hosts`
 
-`sp.lab.com:5061`
+`sp.provider.com`
 
-## Notes for myself
+## Notes for the developers
 
 There seems to be an issue with NIOMessageProcessorFactory that creates TCP/UDP connections issues.
 You will see messages like "WARN - Old socket local ip address /192.168.1.149:51842" in Routr logs
