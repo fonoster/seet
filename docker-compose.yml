@@ -11,9 +11,9 @@ services:
     expose: [5061]
     entrypoint: |
       sh -c '
-          while ! nc -z routr 4567 > /dev/null 2>&1; do sleep 0.1; done # Wait for Routr
-          cd tests && npm install && npm test
-          node stop_dut.js
+        while ! nc -z routr 4567 > /dev/null 2>&1; do sleep 0.1; done # Wait for Routr
+        cd tests && npm install && npm test
+        node stop_dut.js
       '
     env_file: .env
     volumes:
