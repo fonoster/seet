@@ -1,4 +1,4 @@
-name: End to End Test
+name: eet
 on: [push]
 jobs:
   build:
