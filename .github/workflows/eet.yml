@@ -8,6 +8,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Test
-        env:
-          ROUTR_EXTERN_ADDR: 127.0.0.1
         run: docker-compose up --abort-on-container-exit --exit-code-from routr-eet
