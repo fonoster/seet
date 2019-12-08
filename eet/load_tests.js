@@ -13,7 +13,7 @@ describe('Load testing', function() {
     before(() => process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0')
     after(async () => await cleanLoc())
 
-    it.skip('Transactional', done => {
+    it('Transactional', done => {
         const enterprisePhonePort = 5062
         // Register phone-e1 to DUT
         new SIPpW(process.env.DUT_HOST, enterprisePhonePort)
@@ -25,15 +25,12 @@ describe('Load testing', function() {
             .start()
 
         // UA acts as the enterprise phone
-        new SIPpW(process.env.DUT_HOST, enterprisePhonePort)
+        new SIPpW(void(0), enterprisePhonePort)
             .withScenario('scenarios/load_tests/uas_ims.xml')
             .withCallMax(process.env.MAX_ITERATIONS)
             .withCallRate(process.env.MAX_RATE)
             .withCallLimit(process.env.CALL_LIMIT)
-            .startAsync((error, stdout, stderr) => {
-                if(error)
-                  console.error(stderr)
-            })
+            .startAsync((e, out, err) => e ? console.error(err) : void(0))
 
         // Send INVITE from phone-s1(2001) to phone-e1(1001)
         const result = new SIPpW(process.env.DUT_HOST)
@@ -44,7 +41,6 @@ describe('Load testing', function() {
             .withCallMax(process.env.MAX_ITERATIONS)
             .withCallRate(process.env.MAX_RATE)
             .withCallLimit(process.env.CALL_LIMIT)
-            .withTraceScreen()
             .start()
 
         done(result.stderr ? result : void(0))
