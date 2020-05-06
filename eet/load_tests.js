@@ -13,7 +13,7 @@ describe('Load testing', function() {
     before(() => process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0')
     after(async () => await cleanLoc())
 
-    it('Transactional', done => {
+    it.skip('Transactional', done => {
         const enterprisePhonePort = 5062
         // Register phone-e1 to DUT
         new SIPpW(process.env.DUT_HOST, enterprisePhonePort)
