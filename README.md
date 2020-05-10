@@ -1,6 +1,6 @@
 # Routr EET
 
-[![End to End Test Suit](https://github.com/fonoster/routr-eet/workflows/build/badge.svg)](https://github.com/fonoster/routr-eet/actions?workflow=build)
+![publish to docker](https://github.com/fonoster/routr-eet/workflows/publish%20to%20docker/badge.svg)
 
 <img src="test_example.png" />
 
