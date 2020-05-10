@@ -1,4 +1,4 @@
-name: build
+name: publish to docker 
 on: [push]
 jobs:
   build:
