@@ -1,6 +1,6 @@
 # SIP End-to-End Testing Suite
 
-![publish to docker](https://github.com/fonoster/routr-eet/workflows/publish%20to%20docker/badge.svg)
+![publish to docker](https://github.com/fonoster/seet/workflows/publish%20to%20docker/badge.svg)
 
 <img src="test_example.png" />
 
