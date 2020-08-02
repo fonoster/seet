@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.11
 MAINTAINER Pedro Sanders <fonosterteam@fonoster.com>
 
 COPY . tester
