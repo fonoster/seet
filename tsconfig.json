@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "declaration": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "module": "commonjs",
+    "target": "es2020",
+    "lib": [
+      "es2020"
+    ],
+    "moduleResolution": "node",
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
