@@ -40,9 +40,8 @@ export const getConfig = (envname: string): Scenario[] => {
   
   try {
     return require(process.env[envname])
-  } catch (e) {
-    console.log(e)
-    console.error(`the configuration file is invalid or doesn't exist: file=> ${process.env[envname]}`)
+  } catch (e) { 
+    console.error(`the configuration file is invalid or doesn't exist: file => ${process.env[envname]}`)
     process.exit(1)
   }  
 }

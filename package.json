@@ -2,20 +2,21 @@
   "name": "seet",
   "version": "1.0.2",
   "author": "Fonoster Inc.",
-  "description": "End to end for Signaling Servers",
+  "description": "End to end testing for SIP Signaling",
   "license": "MIT",
   "scripts": {
     "build": "tsc -b tsconfig.json",
     "test": "cross-env SCENARIOS=$(pwd)/example.json NODE_ENV=dev nyc --reporter=lcov mocha --slow 20000 --timeout 1500000 src/seet"
   },
   "bin": {
-    "seet": ".scripts/run_echo.sh",
+    "seet": ".scripts/seet.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/psanders/seet.git"
   },
   "keywords": [
+    "testing",
     "signaling",
     "sip",
     "routr"
@@ -44,13 +45,13 @@
     "@types/sinon": "^10.0.6",
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
-    "prettier-standard": "^13.0.6",
     "cross-env": "^7.0.2",
     "eslint": "^7.23.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-no-loops": "^0.3.0",
     "eslint-plugin-notice": "^0.9.10",
-    "eslint-plugin-prettier": "^3.3.1"
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier-standard": "^13.0.6"
   }
 }

@@ -1,9 +1,14 @@
+# src
 node_modules
 .nyc_output
 coverage
-src
 test
 *.log
+Dockerfile
+CONTRIBUTING.md
+env_example
+seet-*.tgz
+test_example.png
 README.md
 tsconfig.json
 .dockerignore
