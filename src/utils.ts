@@ -87,7 +87,7 @@ export function createAgent(
 
   const remoteHost = ua.mode === UACMode.UAC ? scenario.target : undefined;
 
-  const client = new SIPP({ remoteHost, localPort: port })
+  const client = new SIPP({ remoteHost, localPort: port, timeout: ua.timeout })
     .withScenario(ua.scenarioFile)
     .withTransportMode(ua.transportMode || scenario.transportMode);
 

@@ -1,12 +1,12 @@
 {
   "name": "@fonoster/seet",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Fonoster Inc.",
   "description": "End to end testing for SIP Signaling",
   "license": "MIT",
   "scripts": {
     "build": "tsc -b tsconfig.json",
-    "test": "cross-env SCENARIOS=$(pwd)/seet_example.json NODE_ENV=dev nyc --reporter=lcov mocha --slow 20000 --timeout 1500000 src/seet",
+    "test": "cross-env SCENARIOS=$(pwd)/seet_example.json NODE_ENV=dev nyc --reporter=lcov mocha --slow 50000 --timeout 1500000 src/seet",
     "lint": "eslint src --ext .ts --fix",
     "format": "prettier --write src",
     "prepare": "husky install"
@@ -37,7 +37,7 @@
     "nyc": "^15.1.0",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0",
-    "sipp-js": "^0.1.0",
+    "sipp-js": "^0.1.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.1.5"
   },

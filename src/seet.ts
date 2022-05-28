@@ -21,13 +21,16 @@ import { Scenario, UA, UACMode } from "./types";
 
 const scenarios: Scenario[] = getConfig("SCENARIOS");
 
-describe(`SEET Test Plan / ${scenarios.length} scenario/s found`, () => {
+describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
   scenarios.forEach((s) => {
-    it[s.enabled ? "only" : "skip"](s.description, (done) => {
+    it[s.enabled ? "only" : "skip"](s.name, (done) => {
       // We start all the UAS first
       s.userAgents
         .filter((ua: UA) => ua.mode === UACMode.UAS)
-        .forEach((ua) => createAgent(s, ua, done));
+        .forEach((ua: UA) => {
+          ua.timeout = ua.timeout ? ua.timeout : 30;
+          createAgent(s, ua, done);
+        });
 
       // Run remaining agents after a timeout
       setTimeout(() => {
