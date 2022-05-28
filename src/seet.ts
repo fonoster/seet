@@ -16,25 +16,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { createAgent, getConfig } from './utils'
-import { Scenario, UA, UACMode } from './types'
+import { createAgent, getConfig } from "./utils";
+import { Scenario, UA, UACMode } from "./types";
+import logger from "@fonoster/logger";
 
-const scenarios: Scenario[] = getConfig("SCENARIOS")
+const scenarios: Scenario[] = getConfig("SCENARIOS");
 
-console.log(`${scenarios.length} scenario/s found`)
+logger.info(`${scenarios.length} scenario/s found`);
 
-describe('SEET Test Plan', () => {
-  for (let s of scenarios) {
-    it(s.description, done => {
+describe("SEET Test Plan", () => {
+  scenarios.forEach((s) => {
+    it(s.description, (done) => {
       // We start all the UAS first
-      s.userAgents.filter((ua: UA) => ua.mode === UACMode.UAS)
-        .forEach(ua => createAgent(s, ua, done))
+      s.userAgents
+        .filter((ua: UA) => ua.mode === UACMode.UAS)
+        .forEach((ua) => createAgent(s, ua, done));
 
       // Run remaining agents after a timeout
       setTimeout(() => {
-        s.userAgents.filter((ua: UA) => ua.mode === UACMode.UAC)
-          .forEach(ua => createAgent(s, ua))
-      }, 5000)
-    })
-  }
-})
+        s.userAgents
+          .filter((ua: UA) => ua.mode === UACMode.UAC)
+          .forEach((ua) => createAgent(s, ua));
+      }, 5000);
+    });
+  });
+});
