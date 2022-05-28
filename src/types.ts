@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { TransportMode } from "sipp-js"
+import { TransportMode } from "sipp-js";
 
 export enum UACMode {
   UAC = "uac",
@@ -24,44 +24,44 @@ export enum UACMode {
 }
 
 export interface UA {
-  mode: UACMode
-  scenarioFile: string
+  mode: UACMode;
+  scenarioFile: string;
   authentication?: {
-    username: string
-    secret: string
-  }
-  sendRegister: boolean
-  expires: number
-  transportMode: TransportMode
-  variables?: { name: string, value: string }[]
-  timeout?: number
+    username: string;
+    secret: string;
+  };
+  sendRegister: boolean;
+  expires: number;
+  transportMode: TransportMode;
+  variables?: { name: string; value: string }[];
+  timeout?: number;
 }
 
 export interface Scenario {
-  name: string
-  description: string
-  userAgents: UA[]
-  externalHost: string
-  externalPort: number
-  target: string
-  domain?: string
-  transportMode: TransportMode
+  name: string;
+  description: string;
+  userAgents: UA[];
+  externalHost: string;
+  externalPort: number;
+  target: string;
+  domain?: string;
+  transportMode: TransportMode;
   options: {
-    maxIterations?: number
-    maxRate?: number
-    callLimit?: number
-    rateIncrease?: number
-    rateIncreaseTime?: number
-  }
-  enabled: boolean
+    maxIterations?: number;
+    maxRate?: number;
+    callLimit?: number;
+    rateIncrease?: number;
+    rateIncreaseTime?: number;
+  };
+  enabled: boolean;
 }
 
 export interface RegisterRequest {
-  registrarAddr: string
-  myPort: number
-  domain: string
-  username: string
-  secret: string
-  expires: number
-  transportMode: TransportMode
+  registrarAddr: string;
+  myPort: number;
+  domain: string;
+  username: string;
+  secret: string;
+  expires: number;
+  transportMode: TransportMode;
 }
