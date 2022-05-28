@@ -8,7 +8,8 @@
     "build": "tsc -b tsconfig.json",
     "test": "cross-env SCENARIOS=$(pwd)/seet_example.json NODE_ENV=dev nyc --reporter=lcov mocha --slow 20000 --timeout 1500000 src/seet",
     "lint": "eslint src --ext .ts --fix",
-    "format": "prettier --write src"
+    "format": "prettier --write src",
+    "prepare": "husky install"
   },
   "bin": {
     "seet": ".scripts/seet.sh"
@@ -55,6 +56,7 @@
     "eslint-plugin-no-loops": "^0.3.0",
     "eslint-plugin-notice": "^0.9.10",
     "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^8.0.1",
     "prettier-standard": "^13.0.6"
   }
 }
