@@ -17,9 +17,9 @@ FROM node:lts-alpine as runner
 ARG SCENARIOS=/seet.json
 ENV SCENARIOS=${SCENARIOS}
 ENV TINI_VERSION=v0.19.0
-COPY --from=builder /build/seet-*.tgz ./
+COPY --from=builder /build/fonoster-seet-* ./
 RUN apk add --update sipp=3.6.0-r2 \
-  && npm install -g seet-*.tgz
+  && npm install -g fonoster-seet-*.tgz
 
 ENTRYPOINT ["sh", "-c"]
 CMD [ "seet" ]

@@ -18,15 +18,12 @@
  */
 import { createAgent, getConfig } from "./utils";
 import { Scenario, UA, UACMode } from "./types";
-import logger from "@fonoster/logger";
 
 const scenarios: Scenario[] = getConfig("SCENARIOS");
 
-logger.info(`${scenarios.length} scenario/s found`);
-
-describe("SEET Test Plan", () => {
+describe(`SEET Test Plan / ${scenarios.length} scenario/s found`, () => {
   scenarios.forEach((s) => {
-    it(s.description, (done) => {
+    it[s.enabled ? "only" : "skip"](s.description, (done) => {
       // We start all the UAS first
       s.userAgents
         .filter((ua: UA) => ua.mode === UACMode.UAS)
@@ -37,7 +34,7 @@ describe("SEET Test Plan", () => {
         s.userAgents
           .filter((ua: UA) => ua.mode === UACMode.UAC)
           .forEach((ua) => createAgent(s, ua));
-      }, 5000);
+      }, 3000);
     });
   });
 });
