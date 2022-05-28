@@ -19,9 +19,8 @@
 import { createAgent, getConfig } from './utils'
 import { Scenario, UA, UACMode } from './types'
 
-const scenarios:Scenario[] = getConfig("SCENARIOS")
+const scenarios: Scenario[] = getConfig("SCENARIOS")
 
-// Log the number of scenarios
 console.log(`${scenarios.length} scenario/s found`)
 
 describe('SEET Test Plan', () => {

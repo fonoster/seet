@@ -1,14 +1,25 @@
-FROM alpine:3.11
+##
+## Build
+##
+FROM node:lts-alpine as builder
 LABEL Pedro Sanders <fonosterteam@fonoster.com>
 
-COPY . /tester
-WORKDIR /tester
+COPY . /build
+WORKDIR /build
 
-RUN apk add --update sipp=3.6.0-r0 nodejs npm \
-  && npm install -f \
-  && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+RUN npm install && npm run build && npm pack
 
-EXPOSE 5061
-EXPOSE 5062
+##
+## Runner
+##
+FROM node:lts-alpine as runner
 
-ENTRYPOINT ["sh", "-c", "/tester/run.sh"]
+ARG SCENARIOS=/seet.json
+ENV SCENARIOS=${SCENARIOS}
+ENV TINI_VERSION=v0.19.0
+COPY --from=builder /build/seet-*.tgz ./
+RUN apk add --update sipp=3.6.0-r2 \
+  && npm install -g seet-*.tgz
+
+ENTRYPOINT ["sh", "-c"]
+CMD [ "seet" ]

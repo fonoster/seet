@@ -45,7 +45,7 @@ export interface Scenario {
   externalPort: number
   target: string
   domain?: string
-  transportMode: UACMode
+  transportMode: TransportMode
   options: {
     maxIterations?: number
     maxRate?: number
