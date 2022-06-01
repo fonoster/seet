@@ -48,8 +48,8 @@ None
 
 ## Volumes
 
-- `/scenarios - Location for your SIPp `xml` files
-- `/seet.json - Default location for your scenarios file
+- `/scenarios` - Location for your SIPp `xml` files
+- `/seet.json` - Default location for your scenarios file
 
 ## Contributing
 
