@@ -17,7 +17,7 @@
         },
         "sendRegister": true,
         "expires": 30,
-        "timeout": 10000
+        "timeout": 600
       },
       {
         "mode": "uac",
@@ -31,7 +31,7 @@
           { "name": "from", "value":  "1002@sip.local"},
           { "name": "to", "value": "1001@sip.local"}
         ],
-        "timeout": 3000
+        "timeout": 30
       }
     ],
     "enabled": true
