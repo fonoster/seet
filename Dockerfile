@@ -2,7 +2,7 @@
 ## Build
 ##
 FROM node:lts-alpine as builder
-LABEL Pedro Sanders <fonosterteam@fonoster.com>
+LABEL Pedro Sanders <psanders@fonoster.com>
 
 COPY . /build
 WORKDIR /build
