@@ -107,7 +107,7 @@ export function createAgent(
     );
   } else {
     const result = client.start();
-    if (result) {
+    if ("message" in result) {
       logger.error((result as unknown as { message: string }).message);
     }
   }
