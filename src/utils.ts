@@ -24,7 +24,7 @@ export const getRandomPort = () =>
   Math.floor(Math.random() * (6000 - 5060)) + 5060;
 
 export const register = (req: RegisterRequest) => {
-  new SIPP({ remoteHost: req.registrarAddr, localPort: req.myPort })
+  new SIPP({ remoteHost: req.registrarAddr, localPort: req.port })
     .withScenario(`${process.cwd()}/scenarios/registration.xml`)
     .setUsername(req.username)
     .setPassword(req.secret)
@@ -60,7 +60,7 @@ export const getConfig = (envname: string): Scenario[] => {
 export function sendRegister(scenario: Scenario, ua: UA, port: number) {
   register({
     registrarAddr: scenario.target,
-    myPort: port,
+    port,
     domain: scenario.domain || scenario.target.split(":")[0],
     username: ua.authentication?.username,
     secret: ua.authentication.secret,
@@ -81,7 +81,7 @@ export function createAgent(
   ua: UA,
   done?: (message?: string) => void
 ) {
-  const port = getRandomPort();
+  const port = ua.port ? ua.port : getRandomPort();
 
   if (ua.sendRegister) sendRegister(scenario, ua, port);
 

@@ -25,6 +25,7 @@ export enum UACMode {
 
 export interface UA {
   mode: UACMode;
+  port?: number;
   scenarioFile: string;
   authentication?: {
     username: string;
@@ -58,7 +59,7 @@ export interface Scenario {
 
 export interface RegisterRequest {
   registrarAddr: string;
-  myPort: number;
+  port: number;
   domain: string;
   username: string;
   secret: string;
