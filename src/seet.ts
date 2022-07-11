@@ -28,7 +28,7 @@ describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
       s.userAgents
         .filter((ua: UA) => ua.mode === UACMode.UAS)
         .forEach((ua: UA) => {
-          ua.timeout = ua.timeout ? ua.timeout : 30;
+          ua.timeout = ua.timeout ? ua.timeout * 1000 : 30000;
           createAgent(s, ua, done);
         });
 

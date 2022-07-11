@@ -42,7 +42,7 @@ export interface Scenario {
   name: string;
   description: string;
   userAgents: UA[];
-  externalHost: string;
+  // externalHost: string;
   externalPort: number;
   target: string;
   domain?: string;
