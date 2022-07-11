@@ -25,7 +25,7 @@ export const getRandomPort = () =>
 
 export const register = (req: RegisterRequest) => {
   new SIPP({ remoteHost: req.registrarAddr, localPort: req.port })
-    .withScenario(`${__dirname}/../scenarios/registration.xml`)
+    .withScenario(`${__dirname}/../../scenarios/registration.xml`)
     .setUsername(req.username)
     .setPassword(req.secret)
     .setVariable("username", req.username)
@@ -98,7 +98,7 @@ export function createAgent(
   }
 
   ua.variables?.forEach((variable) => {
-    client.setVariable(variable.name, variable.value);
+    client.setVariable(variable.name, JSON.stringify(variable.value));
   });
 
   if (ua.mode === UACMode.UAS) {
