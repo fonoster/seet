@@ -7,6 +7,7 @@ test
 Dockerfile
 CONTRIBUTING.md
 test_example.png
+seet_example.json
 README.md
 tsconfig.json
 .dockerignore

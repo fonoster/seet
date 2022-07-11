@@ -25,7 +25,7 @@ export const getRandomPort = () =>
 
 export const register = (req: RegisterRequest) => {
   new SIPP({ remoteHost: req.registrarAddr, localPort: req.port })
-    .withScenario(`${process.cwd()}/scenarios/registration.xml`)
+    .withScenario(`${__dirname}/../scenarios/registration.xml`)
     .setUsername(req.username)
     .setPassword(req.secret)
     .setVariable("username", req.username)

@@ -36,6 +36,14 @@ docker run -v $(pwd)/seet.json:/seet.json \
   -t fonoster/seet
 ```
 
+or with the Node
+
+```
+# Requires of sipp 3.6.0-r2 installed in the host
+npm i -g @fonoster/seet
+SCENARIOS=$(pwd)/seet_example.json seet
+```
+
 ## Environment Variables
 
 Environment variables are used in the entry point script to render configuration templates. You can specify the values of these variables during `docker run`, `docker-compose up`, or in Kubernetes manifests in the `env` array.
