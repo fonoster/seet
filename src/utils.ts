@@ -106,6 +106,9 @@ export function createAgent(
       result ? done("failed: " + result) : done()
     );
   } else {
-    client.start();
+    const result = client.start();
+    if (result) {
+      logger.error((result as unknown as { message: string }).message);
+    }
   }
 }
