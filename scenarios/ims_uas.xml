@@ -3,6 +3,7 @@
 
 <scenario name="UAS IMS">
   <recv request="MESSAGE" crlf="true" />
+  
   <send>
     <![CDATA[
       SIP/2.0 200 OK
@@ -15,7 +16,4 @@
       Content-Length: 0
     ]]>
   </send>
-
-  <ResponseTimeRepartition value="10, 20, 30, 40, 50, 100, 150, 200" />
-  <CallLengthRepartition value="10, 50, 100, 500, 1000, 5000, 10000" />
 </scenario>

@@ -73,7 +73,7 @@ export function sendRegister(scenario: Scenario, ua: UA, port: number) {
  * Create a user agent.
  *
  * @param {string} scenario - the scenario to be used
- * @param {UA} ua - the user agent to be used
+ * @param {UA} ua - the user agent to use
  * @param {Function} done - optional callback for UAs
  */
 export function createAgent(
