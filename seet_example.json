@@ -2,7 +2,6 @@
   {
     "name": "Example Test",
     "description": "This is an example test",
-    "externalHost": "192.168.1.3",
     "externalPort": 7070,
     "target": "192.168.1.3",
     "transportMode": "u1",
@@ -16,8 +15,7 @@
           "secret": "1234"
         },
         "sendRegister": true,
-        "expires": 30,
-        "timeout": 600
+        "expires": 30
       },
       {
         "mode": "uac",
@@ -30,8 +28,7 @@
           { "name": "requestURI", "value": "1001@sip.local"},
           { "name": "from", "value":  "1002@sip.local"},
           { "name": "to", "value": "1001@sip.local"}
-        ],
-        "timeout": 30
+        ]
       }
     ],
     "enabled": true
