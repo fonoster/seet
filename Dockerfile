@@ -7,7 +7,9 @@ LABEL Pedro Sanders <psanders@fonoster.com>
 COPY . /build
 WORKDIR /build
 
-RUN npm install && npm run build && npm pack
+RUN npm install --location=global npm@8.13.2 && npm install
+RUN npm run build
+RUN npm pack
 
 ##
 ## Runner

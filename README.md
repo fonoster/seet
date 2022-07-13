@@ -1,4 +1,4 @@
-# SIP End-to-End Testing Suite
+# SIP End-to-End Testing
 
 ![publish to docker](https://github.com/fonoster/seet/workflows/publish%20to%20docker/badge.svg)
 
