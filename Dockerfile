@@ -4,8 +4,8 @@
 FROM node:lts-alpine as builder
 LABEL Pedro Sanders <psanders@fonoster.com>
 
-COPY . /app
-WORKDIR /app
+COPY . /build
+WORKDIR /build
 
 RUN npm install && npm run build && npm pack
 

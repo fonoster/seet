@@ -30,7 +30,6 @@
   "homepage": "https://github.com/psanders/seet#readme",
   "dependencies": {
     "@fonoster/logger": "^0.3.6-alpha.16",
-    "@fonoster/seet": "file:fonoster-seet-1.0.3.tgz",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "esm": "^3.2.25",
