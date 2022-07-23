@@ -66,3 +66,8 @@ export interface RegisterRequest {
   expires: number;
   transportMode: TransportMode;
 }
+
+export interface UAError {
+  command: string;
+  error: string;
+}

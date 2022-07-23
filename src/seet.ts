@@ -36,7 +36,7 @@ describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
       setTimeout(() => {
         s.userAgents
           .filter((ua: UA) => ua.mode === UACMode.UAC)
-          .forEach((ua) => createAgent(s, ua));
+          .forEach((ua) => createAgent(s, ua, done));
       }, 3000);
     });
   });

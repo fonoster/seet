@@ -16,9 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { RegisterRequest, Scenario, UA, UACMode } from "./types";
+import { RegisterRequest, Scenario, UA, UACMode, UAError } from "./types";
 import SIPP from "sipp-js";
 import logger from "@fonoster/logger";
+import glob from "glob";
+import fs from "fs";
 
 export const getRandomPort = () =>
   Math.floor(Math.random() * (6000 - 5060)) + 5060;
@@ -50,6 +52,25 @@ export const getConfig = (envname: string): Scenario[] => {
   }
 };
 
+const getFullTrace = (ua: UA, message: string): Promise<UAError> => {
+  const arr = ua.scenarioFile.split("/");
+  const baseName = arr[arr.length - 1].split(".xml")[0];
+
+  return new Promise((resolve) => {
+    glob(`${baseName}_*.log`, function (error: Error, files: string[]) {
+      let errors = "";
+      files.forEach((file: string) => {
+        errors += fs.readFileSync(file);
+      });
+
+      resolve({
+        command: message.split("Command failed:")[1].trim(),
+        error: errors,
+      });
+    });
+  });
+};
+
 /**
  * Send a SIP registration request to a given user agent
  *
@@ -79,7 +100,7 @@ export function sendRegister(scenario: Scenario, ua: UA, port: number) {
 export function createAgent(
   scenario: Scenario,
   ua: UA,
-  done?: (message?: string) => void
+  done?: (message?: string | Error) => void
 ) {
   const port = ua.port ? ua.port : getRandomPort();
 
@@ -102,13 +123,25 @@ export function createAgent(
   });
 
   if (ua.mode === UACMode.UAS) {
-    client.startAsync((result: unknown) =>
-      result ? done("failed: " + result) : done()
-    );
+    client.startAsync((result: unknown) => {
+      if (result) {
+        getFullTrace(
+          ua,
+          (result as unknown as { message: string }).message
+        ).then((error) => {
+          logger.error(JSON.stringify(error, null, 2));
+        });
+      }
+    });
   } else {
     const result = client.start();
     if ("message" in result) {
-      logger.error((result as unknown as { message: string }).message);
+      getFullTrace(ua, (result as unknown as { message: string }).message).then(
+        (error) => {
+          logger.error(JSON.stringify(error, null, 2));
+          done(new Error((result as unknown as { message: string }).message));
+        }
+      );
     }
   }
 }
