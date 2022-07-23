@@ -142,6 +142,8 @@ export function createAgent(
           done(new Error((result as unknown as { message: string }).message));
         }
       );
+    } else {
+      done();
     }
   }
 }
