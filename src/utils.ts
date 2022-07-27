@@ -64,7 +64,9 @@ const getFullTrace = (ua: UA, message: string): Promise<UAError> => {
       });
 
       resolve({
-        command: message.split("Command failed:")[1].trim(),
+        command: message.includes("Command failed:")
+          ? message.split("Command failed:")[1].trim()
+          : message,
         error: errors,
       });
     });
