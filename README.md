@@ -36,7 +36,7 @@ docker run -v $(pwd)/seet.json:/seet.json \
   -t fonoster/seet
 ```
 
-or with the Node
+or with NodeJS
 
 ```
 # Requires of sipp 3.6.0-r2 installed in the host
