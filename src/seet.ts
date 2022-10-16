@@ -16,27 +16,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { createAgent, getConfig } from "./utils";
-import { Scenario, UA, UACMode } from "./types";
+import { createAgent } from "./agent";
+import { getConfig } from "./config";
+import { Scenario, UAMode } from "./types";
 
 const scenarios: Scenario[] = getConfig("SCENARIOS");
 
 describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
-  scenarios.forEach((s) => {
-    it[s.enabled ? "only" : "skip"](s.name, (done) => {
-      // We start all the UAS first
-      s.userAgents
-        .filter((ua: UA) => ua.mode === UACMode.UAS)
-        .forEach((ua: UA) => {
-          ua.timeout = ua.timeout ? ua.timeout * 1000 : 30000;
-          createAgent(s, ua, done);
+  scenarios.forEach((scenario) => {
+    it[scenario.enabled ? "only" : "skip"](scenario.name, (done) => {
+      // We start all the User Agent Servers (UAS) first
+      scenario.userAgents
+        .filter((userAgent) => userAgent.mode === UAMode.UAS)
+        .forEach((userAgent) => {
+          userAgent.timeout = userAgent.timeout
+            ? userAgent.timeout * 1000
+            : 30000;
+          createAgent(scenario, userAgent, done);
         });
 
-      // Run remaining agents after a timeout
+      // Then, we start all the User Agent Clients (UAC)
       setTimeout(() => {
-        s.userAgents
-          .filter((ua: UA) => ua.mode === UACMode.UAC)
-          .forEach((ua) => createAgent(s, ua, done));
+        scenario.userAgents
+          .filter((userAgent) => userAgent.mode === UAMode.UAC)
+          .forEach((userAgent) => createAgent(scenario, userAgent, done));
       }, 3000);
     });
   });

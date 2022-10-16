@@ -18,13 +18,17 @@
  */
 import { TransportMode } from "sipp-js";
 
-export enum UACMode {
+export interface Message {
+  message: string;
+}
+
+export enum UAMode {
   UAC = "uac",
   UAS = "uas",
 }
 
-export interface UA {
-  mode: UACMode;
+export interface UAConfig {
+  mode: UAMode;
   port?: number;
   scenarioFile: string;
   authentication?: {
@@ -41,7 +45,7 @@ export interface UA {
 export interface Scenario {
   name: string;
   description: string;
-  userAgents: UA[];
+  userAgents: UAConfig[];
   // externalHost: string;
   // externalPort: number;
   target: string;

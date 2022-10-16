@@ -32,6 +32,7 @@ The following is a basic example of using this image.
 
 ```
 docker run -v $(pwd)/seet.json:/seet.json \
+  -p 6060:6060 \ # Add the port for every User Agent Server
   -v $(pwd)/scenarios:/scenarios \
   -t fonoster/seet
 ```
