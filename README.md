@@ -1,6 +1,6 @@
 # SIP End-to-End Testing
 
-![publish to docker](https://github.com/fonoster/seet/workflows/publish%20to%20docker/badge.svg)
+[![publish to docker hub](https://github.com/fonoster/seet/actions/workflows/gh-docker.yml/badge.svg)](https://github.com/fonoster/seet/actions/workflows/gh-docker.yml)
 
 <img src="test_example.png" />
 
