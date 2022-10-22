@@ -60,7 +60,12 @@ export function createAgent(
   });
 
   if (ua.mode === UAMode.UAS) {
+    const timeoutTimer = setTimeout(() => {
+      done(new Error("timeout"));
+    }, ua.timeout);
+
     sipp.startAsync((error: Error) => {
+      clearTimeout(timeoutTimer);
       // If we only have one UAS we can stop the test
       if (scenario.userAgents.length === 1) done(error);
     });

@@ -1,6 +1,6 @@
 {
   "name": "@fonoster/seet",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Fonoster Inc.",
   "description": "End to end testing for SIP Signaling",
   "license": "MIT",
