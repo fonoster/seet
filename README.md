@@ -28,11 +28,11 @@ docker pull fonoster/seet:%%VERSION%%
 
 ## Usage Example
 
-The following is a basic example of using this image.
+The following is a basic example of using this image. Be sure to add the port of every User Agent Server. Also if you use an udp  mode in your scenario (e.g `u1`), you must also bind the port in docker with the corresponding udp notation.
 
 ```
 docker run -v $(pwd)/seet.json:/seet.json \
-  -p 6060:6060 \ # Add the port for every User Agent Server
+  -p 7060:7060/udp \ 
   -v $(pwd)/scenarios:/scenarios \
   -t fonoster/seet
 ```
