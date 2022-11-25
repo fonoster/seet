@@ -20,7 +20,7 @@ ENV SCENARIOS=${SCENARIOS}
 COPY --from=builder /build/fonoster-seet-* ./
 
 RUN apk add --update sipp=3.6.0-r2 \
-  && npm install -g fonoster-seet-*.tgz \
+  && npm install --location=global fonoster-seet-*.tgz \
   && rm -f fonoster-seet-*.tgz
 
 ENTRYPOINT ["sh", "-c"]
