@@ -1,7 +1,7 @@
 ##
 ## Build
 ##
-FROM node:lts-alpine as builder
+FROM node:16.15.1-alpine3.15 as builder
 LABEL Pedro Sanders <psanders@fonoster.com>
 
 COPY . /build
@@ -12,7 +12,7 @@ RUN npm install && npm run build && npm pack
 ##
 ## Runner
 ##
-FROM node:lts-alpine as runner
+FROM node:16.15.1-alpine3.15 as runner
 
 ARG SCENARIOS=/seet.json
 ENV SCENARIOS=${SCENARIOS}
