@@ -1,7 +1,7 @@
 [
   {
-    "name": "Example Test",
-    "description": "This is an example test",
+    "name": "Simple SIP Message",
+    "description": "UAC sends a simple MESSAGE to UAS and waits for an OK response",
     "target": "192.168.1.3",
     "transportMode": "u1",
     "domain": "sip.local",
@@ -24,9 +24,18 @@
           "secret": "1234"
         },
         "variables": [
-          { "name": "requestURI", "value": "1001@sip.local"},
-          { "name": "from", "value":  "1002@sip.local"},
-          { "name": "to", "value": "1001@sip.local"}
+          {
+            "name": "requestURI",
+            "value": "1001@sip.local"
+          },
+          {
+            "name": "from",
+            "value": "1002@sip.local"
+          },
+          {
+            "name": "to",
+            "value": "1001@sip.local"
+          }
         ]
       }
     ],

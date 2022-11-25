@@ -2,6 +2,7 @@
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 
 <scenario name="UAS IMS">
+
   <recv request="MESSAGE" crlf="true" />
   
   <send>
@@ -16,4 +17,5 @@
       Content-Length: 0
     ]]>
   </send>
+
 </scenario>

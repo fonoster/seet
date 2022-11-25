@@ -2,6 +2,7 @@
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 
 <scenario name="UAC IMS">
+
   <Global variables="requestURI,from,to" />
  
   <send retrans="500">
@@ -15,10 +16,12 @@
       Subject: Performance Test
       Content-Type: text/plain
       Content-Length: [len]
-      Hello!]]>
+      Hello!
+    ]]>
   </send>
  
   <recv response="100" optional="true" />
 
-  <recv response="200" crlf="true" rtd="true"></recv>
+  <recv response="200" crlf="true" rtd="true" />
+
 </scenario>

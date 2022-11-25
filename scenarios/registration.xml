@@ -2,7 +2,9 @@
 <!DOCTYPE scenario SYSTEM "sipp.dtd">
 
 <scenario name="registration">
+
   <Global variables="domain,username,expires" />
+
   <send retrans="500">
     <![CDATA[
       REGISTER sip:[$domain] SIP/2.0
@@ -16,10 +18,11 @@
       Expires: [$expires]
       Content-Length: 0
       User-Agent: SIPp
-  ]]>
+    ]]>
   </send>
 
   <recv response="100" optional="true" />
+
   <recv response="401" auth="true" rtd="true" />
 
   <send retrans="500" rtd="true">
@@ -40,8 +43,7 @@
   </send>
 
   <recv response="100" optional="true" />
+
   <recv response="200" rtd="true" />
-  <CallLengthRepartition value="10, 50, 100, 150, 200, 500, 1000" />
-  <ResponseTimeRepartition value="10, 50, 100, 150, 200, 500, 1000" />
 
 </scenario>

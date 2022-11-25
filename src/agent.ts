@@ -67,7 +67,9 @@ export function createAgent(
     sipp.startAsync((error: Error) => {
       clearTimeout(timeoutTimer);
       // If we only have one UAS we can stop the test
-      if (scenario.userAgents.length === 1) done(error);
+      if (error) {
+        done(new Error("UAS failed. See logs for more details"));
+      }
     });
   } else {
     const result = sipp.start();
