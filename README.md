@@ -14,7 +14,7 @@ It lets you run complex scenarios involving multiple UASs and UACs. With SEET, y
 | --------------------------------------- | ----------------------------------------------------------------- | -------- |
 | name                                    | The name of the scenario                                          | Yes      |
 | description                             | The description of the scenario                                   | No       |
-| target                                  | System under test                                                 | Yes      |
+| target                                  | System under test                                                 | No       |
 | transportMode                           | SIPp transport mode. Check [here](https://github.com/SIPp/sipp/blob/v3.6.1/docs/transport.rst) for possible values               | Yes      |
 | domain                                  | Needed for registration. Defaults to `target`                     | No       |
 | enabled                                 | Enables scenario. Defauls to `true`                               | No       |
