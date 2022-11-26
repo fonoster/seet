@@ -18,6 +18,7 @@ It lets you run complex scenarios involving multiple UASs and UACs. With SEET, y
 | transportMode                           | SIPp transport mode. Check [here](https://github.com/SIPp/sipp/blob/v3.6.1/docs/transport.rst) for possible values               | Yes      |
 | domain                                  | Needed for registration. Defaults to `target`                     | No       |
 | enabled                                 | Enables scenario. Defauls to `true`                               | No       |
+| only                                    | Exclude all other scenarios. Defauls to `false`                   | No       |
 | userAgents.[*].mode                     | User Agent mode. Possible values are `uac` and `uas`              | Yes      |
 | userAgents.[*].scenarioFile             | Path to the SIPp XML scenario                                     | No       |
 | userAgents.[*].authentication           | Username and password for SIP authentication                      | No       |

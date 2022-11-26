@@ -23,8 +23,12 @@ import { Scenario, UAMode } from "./types";
 const scenarios: Scenario[] = getConfig("SCENARIOS");
 
 describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
-  scenarios.forEach((scenario) => {
-    it[scenario.enabled ? "only" : "skip"](scenario.name, (done) => {
+  scenarios.forEach(function (scenario) {
+    (scenario.only
+      ? it.only
+      : scenario.enabled
+      ? it
+      : it.skip)(scenario.name, (done) => {
       // We start all the User Agent Servers (UAS) first
       scenario.userAgents
         .filter((userAgent) => userAgent.mode === UAMode.UAS)

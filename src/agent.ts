@@ -47,7 +47,7 @@ export function createAgent(
 
   const sipp = new SIPP({ remoteHost, localPort: port, timeout: ua.timeout })
     .withScenario(ua.scenarioFile)
-    .withTransportMode(ua.transportMode || scenario.transportMode);
+    .withTransportMode(ua.transportMode ?? scenario.transportMode);
 
   if (ua.authentication) {
     sipp
@@ -66,9 +66,12 @@ export function createAgent(
 
     sipp.startAsync((error: Error) => {
       clearTimeout(timeoutTimer);
-      // If we only have one UAS we can stop the test
+
       if (error) {
         done(new Error("UAS failed. See logs for more details"));
+      } else if (scenario.userAgents.length === 1) {
+        // We can stop the test if the scenario only has one UAS
+        done();
       }
     });
   } else {

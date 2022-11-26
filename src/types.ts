@@ -59,6 +59,7 @@ export interface Scenario {
     rateIncreaseTime?: number;
   };
   enabled: boolean;
+  only: boolean;
 }
 
 export interface RegisterRequest {
