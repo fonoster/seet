@@ -6,9 +6,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1      
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::$(node -e "console.log(require('./package.json').version)")        
+      - name: Get Package Version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main    
       - name: Publish
         uses: elgohr/Publish-Docker-Github-Action@master 
         with:
@@ -16,4 +16,4 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           workdir: .
-          tags: "latest, ${{ steps.get_version.outputs.VERSION }}"
+          tags: "latest, ${{ steps.package-version.outputs.current-version }}
