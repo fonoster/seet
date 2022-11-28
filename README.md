@@ -20,11 +20,11 @@ It lets you run complex scenarios involving multiple UASs and UACs. With SEET, y
 | enabled                                 | Enables scenario. Defauls to `true`                               | No       |
 | only                                    | Exclude all other scenarios. Defauls to `false`                   | No       |
 | userAgents.[*].mode                     | User Agent mode. Possible values are `uac` and `uas`              | Yes      |
-| userAgents.[*].scenarioFile             | Path to the SIPp XML scenario                                     | No       |
+| userAgents.[*].scenarioFile             | Path to the SIPp XML scenario                                     | Yes      |
 | userAgents.[*].authentication           | Username and password for SIP authentication                      | No       |
 | userAgents.[*].sendRegister             | Used for User Agent registration                                  | No       |
 | userAgents.[*].expires                  | Expiration in seconds use in for `sendRegister`. Defaults to `30` | No       |
-| userAgents.[*].timeout                  | Maximum duration for the scenario                                 | No       |
+| userAgents.[*].timeout                  | Maximum duration in seconds for the scenario                      | No       |
 | userAgents.[*].variables                | Key-value array for SIPp XML scenario                             | No       |
 | options.maxIterations                   | Reserved                                                          | No       |
 | options.maxRate                         | Reserved                                                          | No       |
