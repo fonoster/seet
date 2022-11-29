@@ -26,7 +26,7 @@ describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
   scenarios.forEach(function (scenario) {
     (scenario.only
       ? it.only
-      : scenario.enabled
+      : scenario.enabled === undefined || scenario.enabled
       ? it
       : it.skip)(scenario.name, (done) => {
       // We start all the User Agent Servers (UAS) first
