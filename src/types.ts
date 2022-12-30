@@ -30,6 +30,7 @@ export enum UAMode {
 export interface UAConfig {
   mode: UAMode;
   port?: number;
+  target: string;
   scenarioFile: string;
   authentication?: {
     username: string;
@@ -37,6 +38,7 @@ export interface UAConfig {
   };
   sendRegister: boolean;
   expires: number;
+  sessionCount?: number;
   transportMode: TransportMode;
   variables?: { name: string; value: string }[];
   timeout?: number;
@@ -69,6 +71,7 @@ export interface RegisterRequest {
   username: string;
   secret: string;
   expires: number;
+  sessionCount: number;
   transportMode: TransportMode;
 }
 

@@ -22,6 +22,11 @@ import { getFullTrace } from "./trace";
 import logger from "@fonoster/logger";
 import SIPP from "sipp-js";
 
+let uacCounter = 0;
+
+const uaclength = (scenario: Scenario) =>
+  scenario.userAgents.filter((ua) => ua.mode === UAMode.UAC).length;
+
 /**
  * Create a new Server or Client User Agent.
  *
@@ -34,6 +39,13 @@ export function createAgent(
   ua: UAConfig,
   done: (message?: string | Error) => void
 ) {
+  if (ua.mode === UAMode.UAC) {
+    uacCounter++;
+  } else {
+    // Reset for every scenario
+    uacCounter = 0;
+  }
+
   if (ua.mode === UAMode.UAS && !ua.port) {
     logger.error("port is required for User Agent Server (UAS)");
     process.exit(1);
@@ -82,7 +94,9 @@ export function createAgent(
         done(new Error((result as unknown as Message).message));
       });
     } else {
-      done();
+      if (uaclength(scenario) <= uacCounter) {
+        done();
+      }
     }
   }
 }

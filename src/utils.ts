@@ -27,6 +27,7 @@ const register = (req: RegisterRequest) => {
     .setVariable("username", req.username)
     .setVariable("domain", req.domain)
     .setVariable("expires", `${req.expires ?? 30}`)
+    .setVariable("sessionCount", `${req.sessionCount ?? 0}`)
     .withTransportMode(req.transportMode)
     .start();
 };
@@ -40,12 +41,13 @@ const register = (req: RegisterRequest) => {
  */
 export function sendRegister(scenario: Scenario, ua: UAConfig, port: number) {
   register({
-    registrarAddr: scenario.target,
+    registrarAddr: ua.target ?? scenario.target,
     port,
     domain: scenario.domain ?? scenario.target.split(":")[0],
     username: ua.authentication?.username,
     secret: ua.authentication.secret,
     expires: ua.expires,
+    sessionCount: ua.sessionCount,
     transportMode: ua.transportMode ?? scenario.transportMode,
   });
 }
