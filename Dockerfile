@@ -19,9 +19,10 @@ ENV SCENARIOS=${SCENARIOS}
 
 COPY --from=builder /build/fonoster-seet-* ./
 
-RUN apk add --update sipp=3.6.0-r2 \
+RUN apk add --update sipp=3.6.0-r2 python3 make g++ \
   && npm install --location=global fonoster-seet-*.tgz \
-  && rm -f fonoster-seet-*.tgz
+  && rm -f fonoster-seet-*.tgz \
+  && apk del python3 make g++
 
 ENTRYPOINT ["sh", "-c"]
 CMD [ "seet" ]
