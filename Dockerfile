@@ -7,7 +7,8 @@ LABEL Pedro Sanders <psanders@fonoster.com>
 COPY . /build
 WORKDIR /build
 
-RUN npm install && npm run build && npm pack
+RUN  apk add --update python3 make g++ \
+  && npm install && npm run build && npm pack
 
 ##
 ## Runner
