@@ -22,9 +22,11 @@
     ]]>
   </send>
 
-  <recv response="100" optional="true" />
+  <recv response="401" auth="true" rtd="true" optional="true" next="1" />
 
-  <recv response="401" auth="true" rtd="true" />
+  <recv response="200" rtd="true" next="2"/>
+
+  <label id="1"/>
 
   <send retrans="500" rtd="true">
     <![CDATA[
@@ -44,8 +46,8 @@
     ]]>
   </send>
 
-  <recv response="100" optional="true" />
-
   <recv response="200" rtd="true" />
+
+  <label id="2"/>
 
 </scenario>
