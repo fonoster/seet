@@ -71,6 +71,18 @@ export function createAgent(
     sipp.setVariable(variable.name, JSON.stringify(variable.value));
   });
 
+  if (ua.maxIterations) {
+    sipp.withCallMax(ua.maxIterations);
+  }
+
+  if (ua.maxRate) {
+    sipp.withCallRate(ua.maxRate);
+  }
+
+  if (ua.callLimit) {
+    sipp.withCallLimit(ua.callLimit);
+  }
+
   if (ua.mode === UAMode.UAS) {
     const timeoutTimer = setTimeout(() => {
       done(new Error("timeout"));

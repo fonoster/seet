@@ -28,11 +28,9 @@ It lets you run complex scenarios involving multiple UASs and UACs. With SEET, y
 | userAgents.[*].expires                  | Expiration in seconds use in for `sendRegister`. Defaults to `30` | No       |
 | userAgents.[*].timeout                  | Maximum duration in seconds for the scenario                      | No       |
 | userAgents.[*].variables                | Key-value array for SIPp XML scenario                             | No       |
-| options.maxIterations                   | Reserved                                                          | No       |
-| options.maxRate                         | Reserved                                                          | No       |
-| options.callLimit                       | Reserved                                                          | No       |
-| options.rateIncrease                    | Reserved                                                          | No       |
-| options.rateIncreaseTime                | Reserved                                                          | No       |
+| userAgents.[*].maxIterations            | Maximum number of iterations for the scenario (Experimental)      | No       |
+| userAgents.[*].maxRate                  | Maximun rate of calls per second for the scenario (Experimental)  | No       |
+| userAgents.[*].callLimit                | Maximum simultaneous calls for the scenario (Experimental)        | No       |
 
 **Example of scenario file**
 

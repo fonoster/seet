@@ -42,6 +42,9 @@ export interface UAConfig {
   transportMode: TransportMode;
   variables?: { name: string; value: string }[];
   timeout?: number;
+  maxIterations?: number;
+  maxRate?: number;
+  callLimit?: number;
 }
 
 export interface Scenario {
