@@ -19,32 +19,47 @@
 import { createAgent } from "./agent";
 import { getConfig } from "./config";
 import { Scenario, UAMode } from "./types";
+import { checkSippVersion } from "./version";
 
-const scenarios: Scenario[] = getConfig("SCENARIOS");
+const versionRange = ">=3.6.0 <3.6.1";
 
-describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
-  scenarios.forEach(function (scenario) {
-    (scenario.only
-      ? it.only
-      : scenario.enabled === undefined || scenario.enabled
-      ? it
-      : it.skip)(scenario.name, (done) => {
-      // We start all the User Agent Servers (UAS) first
-      scenario.userAgents
-        .filter((userAgent) => userAgent.mode === UAMode.UAS)
-        .forEach((userAgent) => {
-          userAgent.timeout = userAgent.timeout
-            ? userAgent.timeout * 1000
-            : 30000;
-          createAgent(scenario, userAgent, done);
+checkSippVersion(versionRange)
+  .then((result: { isValid: boolean; version: string }) => {
+    if (result.isValid) {
+      const scenarios: Scenario[] = getConfig("SCENARIOS");
+
+      describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
+        scenarios.forEach(function (scenario) {
+          (scenario.only
+            ? it.only
+            : scenario.enabled === undefined || scenario.enabled
+            ? it
+            : it.skip)(scenario.name, (done) => {
+            // We start all the User Agent Servers (UAS) first
+            scenario.userAgents
+              .filter((userAgent) => userAgent.mode === UAMode.UAS)
+              .forEach((userAgent) => {
+                userAgent.timeout = userAgent.timeout
+                  ? userAgent.timeout * 1000
+                  : 30000;
+                createAgent(scenario, userAgent, done);
+              });
+
+            // Then, we start all the User Agent Clients (UAC)
+            setTimeout(() => {
+              scenario.userAgents
+                .filter((userAgent) => userAgent.mode === UAMode.UAC)
+                .forEach((userAgent) => createAgent(scenario, userAgent, done));
+            }, 3000);
+          });
         });
-
-      // Then, we start all the User Agent Clients (UAC)
-      setTimeout(() => {
-        scenario.userAgents
-          .filter((userAgent) => userAgent.mode === UAMode.UAC)
-          .forEach((userAgent) => createAgent(scenario, userAgent, done));
-      }, 3000);
-    });
+      });
+    } else {
+      console.log(
+        `sipp version ${result.version} is not within the valid range: ${versionRange}`
+      );
+    }
+  })
+  .catch((error: Error) => {
+    console.error(error.message);
   });
-});
