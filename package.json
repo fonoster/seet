@@ -1,6 +1,6 @@
 {
   "name": "@fonoster/seet",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "author": "Fonoster Inc.",
   "description": "End to end testing for SIP Signaling",
   "license": "MIT",
@@ -38,7 +38,7 @@
     "nyc": "^15.1.0",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0",
-    "sipp-js": "^0.1.3",
+    "sipp-js": "^0.1.4",
     "ts-node": "^10.7.0",
     "typescript": "^4.1.5"
   },
