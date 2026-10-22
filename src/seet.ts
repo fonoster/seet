@@ -21,6 +21,9 @@ import { getConfig } from "./config";
 import { Scenario, UAMode } from "./types";
 import { checkSippVersion } from "./version";
 
+// Provided by mocha when started with --delay
+declare const run: () => void;
+
 const versionRange = ">=3.6.0 <4.0.0";
 
 checkSippVersion(versionRange)
@@ -28,6 +31,9 @@ checkSippVersion(versionRange)
     if (result.isValid) {
       const scenarios: Scenario[] = getConfig("SCENARIOS");
 
+      // mocha runs with --delay: the suite is registered after an async check, so
+      // we tell mocha when to start. Without this, mocha finished loading before
+      // the describe existed and reported zero tests as a pass.
       describe(`SEET Test Plan / ${scenarios.length} scenario(s) found`, () => {
         scenarios.forEach(function (scenario) {
           (scenario.only
@@ -54,6 +60,7 @@ checkSippVersion(versionRange)
           });
         });
       });
+      run();
     } else {
       // Exit non-zero: with no describe block mocha would report zero tests and
       // succeed, and a wrong SIPp would pass every test plan it never ran.
