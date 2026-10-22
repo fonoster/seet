@@ -21,7 +21,7 @@ import { getConfig } from "./config";
 import { Scenario, UAMode } from "./types";
 import { checkSippVersion } from "./version";
 
-const versionRange = ">=3.6.0 <3.6.1";
+const versionRange = ">=3.6.0 <4.0.0";
 
 checkSippVersion(versionRange)
   .then((result: { isValid: boolean; version: string }) => {
@@ -55,11 +55,15 @@ checkSippVersion(versionRange)
         });
       });
     } else {
-      console.log(
+      // Exit non-zero: with no describe block mocha would report zero tests and
+      // succeed, and a wrong SIPp would pass every test plan it never ran.
+      console.error(
         `sipp version ${result.version} is not within the valid range: ${versionRange}`
       );
+      process.exit(1);
     }
   })
   .catch((error: Error) => {
     console.error(error.message);
+    process.exit(1);
   });
